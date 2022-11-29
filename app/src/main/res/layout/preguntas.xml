@@ -14,10 +14,11 @@
         android:layout_width="185dp"
         android:layout_height="48dp"
         android:layout_marginTop="104dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner4"
-        app:layout_constraintVertical_bias="0.585" />
+        app:layout_constraintVertical_bias="0.342" />
 
     <ImageView
         android:id="@+id/NoComer"
@@ -41,8 +42,8 @@
 
     <ImageView
         android:id="@+id/NoCorrer"
-        android:layout_width="109dp"
-        android:layout_height="106dp"
+        android:layout_width="98dp"
+        android:layout_height="99dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="19dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +52,9 @@
 
     <ImageView
         android:id="@+id/Zentro"
-        android:layout_width="129dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="113dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoCorrer"
@@ -74,59 +75,66 @@
         style="@style/spinner_style"
         android:layout_width="185dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#00000000"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinner2"
+        style="@style/spinner_style"
         android:layout_width="185dp"
         android:layout_height="48dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner1"
-        style="@style/spinner_style"/>
+        app:layout_constraintVertical_bias="0.095" />
 
     <Spinner
         android:id="@+id/spinner3"
+        style="@style/spinner_style"
         android:layout_width="185dp"
         android:layout_height="48dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        style="@style/spinner_style"/>
+        app:layout_constraintVertical_bias="0.108" />
 
     <Spinner
         android:id="@+id/spinner4"
+        style="@style/spinner_style"
         android:layout_width="185dp"
         android:layout_height="48dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner3"
-        style="@style/spinner_style"/>
+        app:layout_constraintVertical_bias="0.194" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginBottom="28dp"
         android:text="Check"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/button_rounded_border"/>
 
     <TextView
         android:id="@+id/Score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginBottom="44dp"
         android:text="TextView"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

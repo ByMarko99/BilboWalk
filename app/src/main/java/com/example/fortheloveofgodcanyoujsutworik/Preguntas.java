@@ -2,6 +2,7 @@ package com.example.fortheloveofgodcanyoujsutworik;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -111,6 +112,9 @@ public class Preguntas extends AppCompatActivity {
 
                 if(i==5){
                     Score.setText("OSO ONDO");
+                    //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.fuga_bach);
+                    //mediaPlayer.start();
+
                 }
 
 
