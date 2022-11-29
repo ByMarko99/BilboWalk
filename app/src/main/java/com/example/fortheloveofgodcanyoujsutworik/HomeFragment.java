@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -95,6 +96,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
+    private FusedLocationProviderClient fusedLocationClient;
 
     // Used for selecting the current place.
     private List allPoints;
@@ -175,6 +177,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
 
         mapView.getMapAsync(this);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
+
         bubble = v.findViewById(R.id.msgView);
         marker = getResources().getDrawable(R.drawable.tvbackground);
 
@@ -191,33 +207,33 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 try {
 
 
-                int result = r.nextInt(high - low) + low;
-                //Toast.makeText(getContext(), String.valueOf(result), Toast.LENGTH_SHORT).show();
+                    int result = r.nextInt(high - low) + low;
+                    //Toast.makeText(getContext(), String.valueOf(result), Toast.LENGTH_SHORT).show();
 
-                if (result == 1) {
+                    if (result == 1) {
 
-                    bubble.setVisibility(v.VISIBLE);
-                    animateText("    My name is Walter Wartwell White. I live at 308 negra arroyo.");
-                    setCharacterDelay(50);
-
-
-                }else if(result == 2){
-
-                    bubble.setVisibility(v.VISIBLE);
-                    animateText("    Amongus sussy remix");
-                    setCharacterDelay(50);
+                        bubble.setVisibility(v.VISIBLE);
+                        animateText("    My name is Walter Wartwell White. I live at 308 negra arroyo.");
+                        setCharacterDelay(50);
 
 
-                }else{
-                    bubble.setVisibility(v.VISIBLE);
-                    animateText("    Hola niños os voy a enseñar a hacer metanfetamina");
-                    setCharacterDelay(50);
+                    }else if(result == 2){
 
+                        bubble.setVisibility(v.VISIBLE);
+                        animateText("    Amongus sussy remix");
+                        setCharacterDelay(50);
+
+
+                    }else{
+                        bubble.setVisibility(v.VISIBLE);
+                        animateText("    Hola niños os voy a enseñar a hacer metanfetamina");
+                        setCharacterDelay(50);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(getContext(), "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
 
             }
         });
@@ -226,7 +242,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             @Override
             public void onClick(View v) {
                 try {
-                   bubble.setVisibility(v.INVISIBLE);
+                    bubble.setVisibility(v.INVISIBLE);
                 } catch (Exception except) {
                     Log.e(TAG,except +except.getMessage());
                 }
@@ -277,9 +293,26 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     public void onMapReady(final GoogleMap map) {
         this.map = map;
 
-        LatLng bilbo = new LatLng(43.26271, -2.92528);
-        map.addMarker(new MarkerOptions().position(bilbo).title("Marker in Bilbao"));
-        float zoomLevel = 20.0f;
+        LatLng bilbo = new LatLng(43.256962, -2.923460);
+        LatLng begoñako_igogailua = new LatLng(43.2605556, -2.9216667);
+        LatLng begoñako_basilika = new LatLng(43.25868611, -2.91384722);
+        LatLng bilborock  = new LatLng(43.2569444, -2.9275000);
+        LatLng arriaga_plaza  = new LatLng(43.2594444, -2.9250000);
+        LatLng arenal   = new LatLng(43.2602778, -2.9236111);
+        LatLng alhondiga   = new LatLng(43.2597222, -2.9369444);
+        LatLng zuricalday_gozotegia   = new LatLng(43.2508333, -2.9427778);
+
+
+        map.addMarker(new MarkerOptions().position(bilbo).title("Bilbo"));
+        map.addMarker(new MarkerOptions().position(begoñako_igogailua).title("Begoñako Igogailua"));
+        map.addMarker(new MarkerOptions().position(begoñako_basilika).title("Begoñako Basilika"));
+        map.addMarker(new MarkerOptions().position(bilborock).title("Bilborock"));
+        map.addMarker(new MarkerOptions().position(arriaga_plaza).title("Arriaga Plaza"));
+        map.addMarker(new MarkerOptions().position(arenal).title("Arenal"));
+        map.addMarker(new MarkerOptions().position(alhondiga).title("Azkuna Zentroa / Alhondiga"));
+        map.addMarker(new MarkerOptions().position(zuricalday_gozotegia).title("Zuricalday Gozotegia"));
+
+        float zoomLevel = 13.5f;
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(bilbo, zoomLevel));
         map.setOnMapClickListener(this);
 
@@ -287,8 +320,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     }
 
 
+    // Clase para añadir marcadores onclick
     public void onMapClick(LatLng point) {
-        map.clear();
+     /*   map.clear();
         map.addMarker(new MarkerOptions()
                 .position(point)
                 .title("You are here")
@@ -296,7 +330,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         //
 
         getAddress(point.latitude, point.longitude);
-
+*/
     }
 
     private Object getSystemService(String locationService) {
@@ -306,22 +340,22 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
 
     //TODO nothing mar submarine brum brum
-    public void getAddress(double lat, double lng) {
+ /*   public String getAddress(double lat, double lng) {
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
             Address obj = addresses.get(0);
             String add = obj.getAddressLine(0);
-            add = add + "\n" + obj.getCountryName();
-            add = add + "\n" + obj.getCountryCode();
-            add = add + "\n" + obj.getAdminArea();
-            add = add + "\n" + obj.getPostalCode();
-            add = add + "\n" + obj.getSubAdminArea();
-
+          //  add = add + "\n" + obj.getCountryName();
+          //  add = add + "\n" + obj.getCountryCode();
+          //  add = add + "\n" + obj.getAdminArea();
+         //   add = add + "\n" + obj.getPostalCode();
+            //   add = add + "\n" + obj.getSubAdminArea();
 
             Log.v("IGA", "Address" + add);
             // Toast.makeText(this, "Address=>" + add,
             // Toast.LENGTH_SHORT).show();
+            return add;
 
             // TennisAppActivity.showDialog(add);
         } catch (IOException e) {
@@ -329,8 +363,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+        return "";
 
-    }
+    } */
 
 
     @Override
@@ -363,6 +398,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     public void onCameraMove() {
 
     }
+
 
 
 }
