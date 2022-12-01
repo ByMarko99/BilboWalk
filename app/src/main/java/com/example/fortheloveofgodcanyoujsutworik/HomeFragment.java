@@ -4,6 +4,7 @@ package com.example.fortheloveofgodcanyoujsutworik;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,9 +14,11 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -55,6 +58,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -62,7 +66,7 @@ import java.util.Random;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, GoogleMap.OnMapClickListener {
+public class HomeFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, GoogleMap.OnMapClickListener  {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,12 +79,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private String mParam2;
     MapView mapView;
     GoogleMap map;
-    Button btnGuardar;
 boolean check = false;
-    EditText etNombre;
-    EditText etTime;
-    EditText etDate;
-    TextView tvLocation;
+
 
 
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -110,6 +110,7 @@ boolean check = false;
     String localizacion;
     TextView bubble;
     Drawable marker;
+    private static View v;
     private CharSequence mText;
     private int mIndex;
     private long mDelay = 500;
@@ -166,13 +167,27 @@ boolean check = false;
 
 
     }
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params) {
+            buildAlertMessageNoGps();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
+            getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        v = inflater.inflate(R.layout.fragment_home, container, false);
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != //Comprueba solo si tiene write, no hace falta mas, y lo pide sino junto al read
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
@@ -190,7 +205,7 @@ boolean check = false;
             @Override
             public void run() {
                 getLocation();
-
+               // Toast.makeText(getContext(), "aaaa", Toast.LENGTH_SHORT).show();
                 ha.postDelayed(this, 1000);
             }
         }, 1000);
@@ -203,16 +218,11 @@ boolean check = false;
 
                         if (location == null) {
 
+                                    new MyAsyncTask().execute();
 
-                                buildAlertMessageNoGps();
-                            check = isLocationEnabled(getContext());
 
-                            if (check = true){
-                                    LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
-                                    float zoomLevel = 13.5f;
-                                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
-                                    map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
-                                }
+
+
 
 
                         }else {
@@ -311,8 +321,6 @@ boolean check = false;
                         }
 
 
-
-
                     }
                 });
     }
@@ -345,31 +353,17 @@ boolean check = false;
                         dialog.cancel();
                     }
                 });
-        final AlertDialog alert = builder.create();
-        alert.show();
+
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                final AlertDialog alert = builder.create();
+                alert.show();            }
+        });
+
 
     }
 
-    public static boolean canGetLocation() {
-        return isLocationEnabled(App.appInstance); // application context
-    }
 
-    public static boolean isLocationEnabled(Context context) {
-        int locationMode = 0;
-        String locationProviders;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            try {
-                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
-            } catch (Settings.SettingNotFoundException e) {
-                e.printStackTrace();
-            }
-            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
-        } else {
-            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
-            return !TextUtils.isEmpty(locationProviders);
-        }
-    }
 
 
 
