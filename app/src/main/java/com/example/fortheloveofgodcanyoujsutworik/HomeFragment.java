@@ -2,15 +2,22 @@ package com.example.fortheloveofgodcanyoujsutworik;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,7 +76,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     MapView mapView;
     GoogleMap map;
     Button btnGuardar;
-
+boolean check = false;
     EditText etNombre;
     EditText etTime;
     EditText etDate;
@@ -177,17 +184,45 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
 
         mapView.getMapAsync(this);
+        final Handler ha=new Handler();
+        ha.postDelayed(new Runnable() {
 
+            @Override
+            public void run() {
+                getLocation();
+
+                ha.postDelayed(this, 1000);
+            }
+        }, 1000);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // Logic to handle location object
+
+                        if (location == null) {
+
+
+                                buildAlertMessageNoGps();
+                            check = isLocationEnabled(getContext());
+
+                            if (check = true){
+                                    LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
+                                    float zoomLevel = 13.5f;
+                                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
+                                    map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+                                }
+
+
+                        }else {
+                            LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
+                            float zoomLevel = 13.5f;
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
+                            map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+
                         }
+
                     }
                 });
 
@@ -253,6 +288,34 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         return v;
     }
 
+    @SuppressLint("MissingPermission")
+    public void getLocation(){
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+
+                        if (location != null) {
+
+
+                            try {
+                                LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
+                                map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+                            }catch (Exception e){
+
+                            }
+
+
+                        }
+
+
+
+
+                    }
+                });
+    }
     public void animateText(CharSequence text) {
         mText = text;
         mIndex = 0;
@@ -267,9 +330,46 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         mDelay = millis;
     }
 
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        check = true;
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
 
+    }
 
+    public static boolean canGetLocation() {
+        return isLocationEnabled(App.appInstance); // application context
+    }
 
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+        } else {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+            return !TextUtils.isEmpty(locationProviders);
+        }
+    }
 
 
 
@@ -312,9 +412,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         map.addMarker(new MarkerOptions().position(alhondiga).title("Azkuna Zentroa / Alhondiga"));
         map.addMarker(new MarkerOptions().position(zuricalday_gozotegia).title("Zuricalday Gozotegia"));
 
-        float zoomLevel = 13.5f;
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(bilbo, zoomLevel));
-        map.setOnMapClickListener(this);
+
+        //map.setOnMapClickListener(this);
 
 
     }
