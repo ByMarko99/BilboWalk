@@ -3,9 +3,9 @@
 
     <item><layer-list>
         <item><shape>
-            <gradient android:angle="90" android:endColor="#8be7a1" android:startColor="#126a7e" android:type="linear" />
+            <gradient android:angle="90" android:endColor="#00bdff" android:startColor="#b4fff9" android:type="linear" />
 
-            <stroke android:width="2dp" android:color="#000000" />
+            <stroke android:width="4dp" android:color="#1d00ff" />
 
             <corners android:radius="4dp" />
 

@@ -8,6 +8,17 @@
     android:backgroundTint="#00E676"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck6"
+        android:layout_width="106dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/spinner5"
         style="@style/spinner_style"
@@ -18,43 +29,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner4"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.242"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/NoComer"
-        android:layout_width="95dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="97dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_8863414_no_comer_y_beber_icono_ning_n_alimento_o_bebida_s_mbolo_aislado_en_fondo_blanco_no_comer_y_no_bebida" />
 
     <ImageView
-        android:id="@+id/NoGritar"
-        android:layout_width="90dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NoComer"
-        app:srcCompat="@drawable/istockphoto_688314882_612x612" />
-
-    <ImageView
-        android:id="@+id/NoCorrer"
-        android:layout_width="98dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="19dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NoGritar"
-        app:srcCompat="@drawable/_58081711_no_ejecute_la_ilustraci_n_de_la_se_al" />
-
-    <ImageView
         android:id="@+id/Zentro"
-        android:layout_width="113dp"
-        android:layout_height="124dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="95dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoCorrer"
@@ -62,10 +54,10 @@
 
     <ImageView
         android:id="@+id/Silencio"
-        android:layout_width="104dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="18dp"
+        android:layout_width="92dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Zentro"
         app:srcCompat="@drawable/educatodo_senaletica_senal_individual_silencio_22513241882775_800x" />
@@ -92,7 +84,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner1"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.095"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinner3"
@@ -104,7 +97,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.153"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinner4"
@@ -112,11 +106,12 @@
         android:layout_width="185dp"
         android:layout_height="48dp"
         android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner3"
-        app:layout_constraintVertical_bias="0.194" />
+        app:layout_constraintVertical_bias="0.158"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCheck"
@@ -124,10 +119,76 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginBottom="28dp"
+        android:background="@drawable/button_rounded_border"
+        android:fontFamily="casual"
         android:text="Check"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck2"
+        android:layout_width="102dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/button_rounded_border"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnCheck3" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck5"
+        android:layout_width="104dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCheck6" />
+
+    <ImageView
+        android:id="@+id/NoGritar"
+        android:layout_width="103dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NoComer"
+        app:srcCompat="@drawable/istockphoto_688314882_612x612" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck3"
+        android:layout_width="104dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NoCorrer" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck4"
+        android:layout_width="102dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCheck5" />
+
+    <ImageView
+        android:id="@+id/NoCorrer"
+        android:layout_width="93dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NoGritar"
+        app:srcCompat="@drawable/_58081711_no_ejecute_la_ilustraci_n_de_la_se_al" />
 
     <TextView
         android:id="@+id/Score"
