@@ -30,11 +30,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//import android.support.v4.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -73,6 +74,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private Context globalContext = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -80,7 +82,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     MapView mapView;
     GoogleMap map;
 boolean check = false;
-
 
 
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -152,6 +153,7 @@ boolean check = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        globalContext = this.getActivity();
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -167,7 +169,7 @@ boolean check = false;
 
 
     }
-    private class MyAsyncTask extends AsyncTask<Void, Void, Void>
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void> // Bro?
     {
         @Override
         protected Void doInBackground(Void... params) {
@@ -176,8 +178,28 @@ boolean check = false;
         }
         @Override
         protected void onPostExecute(Void result) {
-            HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
-            getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
+            final Handler ha=new Handler();
+            ha.postDelayed(new Runnable() {
+
+                @Override
+                public void run() { // Una vez habre el intent de ajustes empieza a comprobar cada un segundo si se ha activado o no
+                    //    getLocation();
+                    // Toast.makeText(getContext(), "aaaa", Toast.LENGTH_SHORT).show();
+                    if(canGetLocation()){ // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
+                        Intent intent = new Intent(getActivity(), SplashScreen.class);
+                        startActivity(intent);
+                    //    fragmentTransaction.remove(HomeFragment.this).commit();
+                        try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
+                        } catch (Throwable e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                    ha.postDelayed(this, 1000);
+                }
+            }, 1000);
         }
     }
 
@@ -199,16 +221,7 @@ boolean check = false;
 
 
         mapView.getMapAsync(this);
-        final Handler ha=new Handler();
-        ha.postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                getLocation();
-               // Toast.makeText(getContext(), "aaaa", Toast.LENGTH_SHORT).show();
-                ha.postDelayed(this, 1000);
-            }
-        }, 1000);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         fusedLocationClient.getLastLocation()
@@ -219,11 +232,6 @@ boolean check = false;
                         if (location == null) {
 
                                     new MyAsyncTask().execute();
-
-
-
-
-
 
                         }else {
                             LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
@@ -298,7 +306,7 @@ boolean check = false;
         return v;
     }
 
-    @SuppressLint("MissingPermission")
+  /*  @SuppressLint("MissingPermission")
     public void getLocation(){
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -323,7 +331,7 @@ boolean check = false;
 
                     }
                 });
-    }
+    }*/
     public void animateText(CharSequence text) {
         mText = text;
         mIndex = 0;
@@ -338,14 +346,22 @@ boolean check = false;
         mDelay = millis;
     }
 
+    public void onDestroy2() {
+        super.onDestroy();
+
+        getFragmentManager().beginTransaction().remove((Fragment) HomeFragment.this).commitAllowingStateLoss();
+
+    }
+
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                        check = true;
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        check = true;
+
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -354,7 +370,7 @@ boolean check = false;
                     }
                 });
 
-        getActivity().runOnUiThread(new Runnable() {
+        getActivity().runOnUiThread(new Runnable() { // Hilo no puede sacar popups por eso se le pone que ejecute el hilo en el principal grafico
             public void run() {
                 final AlertDialog alert = builder.create();
                 alert.show();            }
@@ -364,7 +380,26 @@ boolean check = false;
     }
 
 
+    public boolean canGetLocation() {
+        return isLocationEnabled(getActivity().getApplicationContext()); // application context
+    }
 
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+        } else {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+            return !TextUtils.isEmpty(locationProviders);
+        }
+    }
 
 
        /*
