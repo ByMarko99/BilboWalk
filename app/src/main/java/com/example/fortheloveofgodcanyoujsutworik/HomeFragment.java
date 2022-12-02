@@ -1,17 +1,13 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -25,41 +21,32 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.support.v4.app.Fragment;
-import androidx.annotation.NonNull;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.location.LocationListener;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -75,13 +62,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private static final String ARG_PARAM2 = "param2";
 
     private Context globalContext = null;
-
+    LocationRequest locationRequest;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     MapView mapView;
     GoogleMap map;
 boolean check = false;
+    private LocationCallback locationCallback;
 
 
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -204,6 +192,7 @@ boolean check = false;
     }
 
 
+    @SuppressLint("MissingPermission")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -238,6 +227,21 @@ boolean check = false;
                             float zoomLevel = 13.5f;
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
                             map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+                            createLocationRequest();
+                            locationCallback = new LocationCallback() {
+                                @Override
+                                public void onLocationResult(LocationResult locationResult) {
+                                    if (locationResult == null) {
+                                        return;
+                                    }
+                                    for (Location location : locationResult.getLocations()) {
+                                        LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
+                                        map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+
+                                    }
+                                }
+                            };
+                            startLocationUpdates();
 
                         }
 
@@ -346,12 +350,7 @@ boolean check = false;
         mDelay = millis;
     }
 
-    public void onDestroy2() {
-        super.onDestroy();
 
-        getFragmentManager().beginTransaction().remove((Fragment) HomeFragment.this).commitAllowingStateLoss();
-
-    }
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -415,10 +414,21 @@ boolean check = false;
         /*CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
         map.animateCamera(cameraUpdate);*/
 
+    protected void createLocationRequest() {
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
 
-    @Override
 
 
+    @SuppressLint("MissingPermission")
+    private void startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(locationRequest,
+                locationCallback,
+                Looper.getMainLooper());
+    }
     public void onMapReady(final GoogleMap map) {
         this.map = map;
 
@@ -500,6 +510,8 @@ boolean check = false;
     public void onResume() {
         mapView.onResume();
         super.onResume();
+
+
     }
 
 
