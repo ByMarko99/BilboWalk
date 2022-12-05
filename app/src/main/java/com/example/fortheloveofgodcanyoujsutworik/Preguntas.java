@@ -48,7 +48,7 @@ public class Preguntas extends AppCompatActivity {
         spinner3.setAdapter(adapter3);
         spinner4.setAdapter(adapter4);
         spinner5.setAdapter(adapter5);
-
+       // MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.AudioYeah);
 
         btnCheck=findViewById(R.id.btnCheck);
         btnCheck.setOnClickListener(new View.OnClickListener() {
@@ -112,8 +112,7 @@ public class Preguntas extends AppCompatActivity {
 
                 if(i==5){
                     Score.setText("OSO ONDO");
-                    //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.fuga_bach);
-                    //mediaPlayer.start();
+                   // mediaPlayer.start();
 
                 }
 
