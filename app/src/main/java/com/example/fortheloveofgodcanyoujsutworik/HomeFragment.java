@@ -1,6 +1,5 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -9,51 +8,44 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.location.LocationListener;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -62,25 +54,22 @@ import java.util.Random;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, GoogleMap.OnMapClickListener {
+public class HomeFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, GoogleMap.OnMapClickListener  {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
+    private Context globalContext = null;
+    LocationRequest locationRequest;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     MapView mapView;
     GoogleMap map;
-    Button btnGuardar;
 boolean check = false;
-    EditText etNombre;
-    EditText etTime;
-    EditText etDate;
-    TextView tvLocation;
+    private LocationCallback locationCallback;
 
 
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -110,6 +99,7 @@ boolean check = false;
     String localizacion;
     TextView bubble;
     Drawable marker;
+    private static View v;
     private CharSequence mText;
     private int mIndex;
     private long mDelay = 500;
@@ -151,6 +141,7 @@ boolean check = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        globalContext = this.getActivity();
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -166,13 +157,48 @@ boolean check = false;
 
 
     }
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void> // Bro?
+    {
+        @Override
+        protected Void doInBackground(Void... params) {
+            buildAlertMessageNoGps();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            final Handler ha=new Handler();
+            ha.postDelayed(new Runnable() {
 
+                @Override
+                public void run() { // Una vez habre el intent de ajustes empieza a comprobar cada un segundo si se ha activado o no
+                    //    getLocation();
+                    // Toast.makeText(getContext(), "aaaa", Toast.LENGTH_SHORT).show();
+                    if(canGetLocation()){ // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
+                        Intent intent = new Intent(getActivity(), SplashScreen.class);
+                        startActivity(intent);
+                    //    fragmentTransaction.remove(HomeFragment.this).commit();
+                        try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
+                        } catch (Throwable e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                    ha.postDelayed(this, 1000);
+                }
+            }, 1000);
+        }
+    }
+
+
+    @SuppressLint("MissingPermission")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        v = inflater.inflate(R.layout.fragment_home, container, false);
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != //Comprueba solo si tiene write, no hace falta mas, y lo pide sino junto al read
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
@@ -184,16 +210,7 @@ boolean check = false;
 
 
         mapView.getMapAsync(this);
-        final Handler ha=new Handler();
-        ha.postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                getLocation();
-
-                ha.postDelayed(this, 1000);
-            }
-        }, 1000);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         fusedLocationClient.getLastLocation()
@@ -203,23 +220,28 @@ boolean check = false;
 
                         if (location == null) {
 
-
-                                buildAlertMessageNoGps();
-                            check = isLocationEnabled(getContext());
-
-                            if (check = true){
-                                    LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
-                                    float zoomLevel = 13.5f;
-                                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
-                                    map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
-                                }
-
+                                    new MyAsyncTask().execute();
 
                         }else {
                             LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
                             float zoomLevel = 13.5f;
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
                             map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+                            createLocationRequest();
+                            locationCallback = new LocationCallback() {
+                                @Override
+                                public void onLocationResult(LocationResult locationResult) {
+                                    if (locationResult == null) {
+                                        return;
+                                    }
+                                    for (Location location : locationResult.getLocations()) {
+                                        LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
+                                        map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+
+                                    }
+                                }
+                            };
+                            startLocationUpdates();
 
                         }
 
@@ -288,7 +310,7 @@ boolean check = false;
         return v;
     }
 
-    @SuppressLint("MissingPermission")
+  /*  @SuppressLint("MissingPermission")
     public void getLocation(){
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -311,11 +333,9 @@ boolean check = false;
                         }
 
 
-
-
                     }
                 });
-    }
+    }*/
     public void animateText(CharSequence text) {
         mText = text;
         mIndex = 0;
@@ -330,14 +350,17 @@ boolean check = false;
         mDelay = millis;
     }
 
+
+
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                        check = true;
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        check = true;
+
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -345,13 +368,19 @@ boolean check = false;
                         dialog.cancel();
                     }
                 });
-        final AlertDialog alert = builder.create();
-        alert.show();
+
+        getActivity().runOnUiThread(new Runnable() { // Hilo no puede sacar popups por eso se le pone que ejecute el hilo en el principal grafico
+            public void run() {
+                final AlertDialog alert = builder.create();
+                alert.show();            }
+        });
+
 
     }
 
-    public static boolean canGetLocation() {
-        return isLocationEnabled(App.appInstance); // application context
+
+    public boolean canGetLocation() {
+        return isLocationEnabled(getActivity().getApplicationContext()); // application context
     }
 
     public static boolean isLocationEnabled(Context context) {
@@ -372,7 +401,6 @@ boolean check = false;
     }
 
 
-
        /*
        //in old Api Needs to call MapsInitializer before doing any CameraUpdateFactory call
         try {
@@ -386,10 +414,21 @@ boolean check = false;
         /*CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
         map.animateCamera(cameraUpdate);*/
 
+    protected void createLocationRequest() {
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
 
-    @Override
 
 
+    @SuppressLint("MissingPermission")
+    private void startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(locationRequest,
+                locationCallback,
+                Looper.getMainLooper());
+    }
     public void onMapReady(final GoogleMap map) {
         this.map = map;
 
@@ -471,6 +510,8 @@ boolean check = false;
     public void onResume() {
         mapView.onResume();
         super.onResume();
+
+
     }
 
 
