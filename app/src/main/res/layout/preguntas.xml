@@ -8,6 +8,13 @@
     android:backgroundTint="#00E676"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        app:srcCompat="@drawable/_ee30b754b931900732528da3c1cf5a3" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCheck6"
         android:layout_width="106dp"
@@ -169,17 +176,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoCorrer" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck4"
-        android:layout_width="102dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCheck5" />
-
     <ImageView
         android:id="@+id/NoCorrer"
         android:layout_width="93dp"
@@ -189,6 +185,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoGritar"
         app:srcCompat="@drawable/_58081711_no_ejecute_la_ilustraci_n_de_la_se_al" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck4"
+        android:layout_width="102dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCheck5" />
 
     <TextView
         android:id="@+id/Score"
