@@ -245,7 +245,11 @@ boolean check = false;
                                         return;
                                     }
                                     for (Location location : locationResult.getLocations()) {
-                                        marker1.remove();
+                                        if (marker1 != null){
+                                            marker1.remove();
+                                               startPulseAnimation(); //TODO fix
+
+                                        }
                                         here = new LatLng(location.getLatitude(), location.getLongitude());
                                         marker1 =  map.addMarker(new MarkerOptions().position(here).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
 
