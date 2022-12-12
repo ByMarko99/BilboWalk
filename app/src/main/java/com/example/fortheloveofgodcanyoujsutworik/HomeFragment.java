@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,12 +25,15 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.ColorInt;
 import androidx.core.app.ActivityCompat;
@@ -53,8 +57,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.gms.location.LocationListener;
 
 import java.util.List;
 import java.util.Random;
@@ -82,15 +84,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private String mParam2;
     MapView mapView;
     GoogleMap map;
+    VideoView videoView;
 boolean check = false;
     private LocationCallback locationCallback;
     Marker marker1;
     MediaPlayer mediaPlayer;
     private static final String TAG = HomeFragment.class.getSimpleName();
     private CameraPosition cameraPosition;
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialogpop;
 
     // The entry point to the Places API.
-    private PlacesClient placesClient;
+    //private PlacesClient placesClient;
 
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -195,9 +200,9 @@ boolean check = false;
 
 
                     }
-                    ha.postDelayed(this, 1000);
+                    ha.postDelayed(this, 300);
                 }
-            }, 1000);
+            }, 300);
         }
     }
 
@@ -209,10 +214,15 @@ boolean check = false;
         // Inflate the layout for this fragment
 
         v = inflater.inflate(R.layout.fragment_home, container, false);
+
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != //Comprueba solo si tiene write, no hace falta mas, y lo pide sino junto al read
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
         }
+        videoView = v.findViewById(R.id.videoview);     // VIDEOVIEW OF XML
+
+        // video();
+
 
         // Gets the MapView from the XML layout and creates it
         mapView = (MapView) v.findViewById(R.id.mapview);
@@ -236,7 +246,6 @@ boolean check = false;
                             here = new LatLng(location.getLatitude(), location.getLongitude());
                             float zoomLevel = 13.5f;
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
-                            map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
                             createLocationRequest();
                             locationCallback = new LocationCallback() {
                                 @Override
@@ -247,7 +256,10 @@ boolean check = false;
                                     for (Location location : locationResult.getLocations()) {
                                         if (marker1 != null){
                                             marker1.remove();
+                                            initPulseEffect();
                                                startPulseAnimation(); //TODO fix
+                                            onCameraIdle();
+
 
                                         }
                                         here = new LatLng(location.getLatitude(), location.getLongitude());
@@ -302,7 +314,6 @@ boolean check = false;
                         animateText("    Amongus sussy remix");
                         setCharacterDelay(50);
                         mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
-                        mediaPlayer.stop();
                         mediaPlayer.start();
 
 
@@ -508,6 +519,9 @@ boolean check = false;
     }
 
 
+    /**
+     *
+     */
     //TODO nothing mar submarine brum brum
  /*   public String getAddress(double lat, double lng) {
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
@@ -536,8 +550,28 @@ boolean check = false;
 
     } */
 
+    public void video(){
+        String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.agurra;    // MP4 PATH
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+
+        MediaController mediaController = new MediaController(getContext());
+        mediaController = new MediaController(getActivity()){
+            @Override
+            public void show (int timeout){
+                if(timeout == 3000) timeout = 50000; //Set to desired number
+                super.show(timeout);
+            }
+        };
+        videoView.setMediaController(mediaController);
+        // VIDEO CONTROLLER
+        mediaController.show(0);
+            mediaController.setAnchorView(videoView);
+
+    }
+
     private void initPulseEffect() {
-        mPulseEffectColor = ContextCompat.getColor(getContext(), com.google.android.libraries.places.R.color.quantum_pink);
+        mPulseEffectColor = ContextCompat.getColor(getContext(), com.google.android.libraries.places.R.color.quantum_googblue500);
         mPulseEffectColorElements = new int[] {
                 Color.red(mPulseEffectColor),
                 Color.green(mPulseEffectColor),
@@ -546,7 +580,7 @@ boolean check = false;
 
         mPulseEffectAnimator = ValueAnimator.ofFloat(0, calculatePulseRadius(map.getCameraPosition().zoom));
         mPulseEffectAnimator.setStartDelay(3000);
-        mPulseEffectAnimator.setDuration(400);
+        mPulseEffectAnimator.setDuration(800);
         mPulseEffectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
@@ -592,7 +626,7 @@ boolean check = false;
             mPulseEffectAnimator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mPulseEffectAnimator.setStartDelay(2000);
+                    mPulseEffectAnimator.setStartDelay(1500);
                     mPulseEffectAnimator.start();
                 }
             });

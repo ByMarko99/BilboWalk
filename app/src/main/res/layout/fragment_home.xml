@@ -27,12 +27,12 @@
 
     <ImageView
         android:id="@+id/waltre"
-        android:layout_width="91dp"
+        android:layout_width="103dp"
         android:layout_height="106dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="18dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="28dp"
         android:scaleType="fitXY"
         android:src="@drawable/noxave1aipk91" />
 
@@ -52,7 +52,17 @@
         android:scrollbars="vertical"
         android:textColor="@color/white"
         android:textSize="50px"
-        android:visibility="invisible" />"
+        android:visibility="invisible" />
+
+    <VideoView
+        android:id="@+id/videoview"
+        android:layout_width="307dp"
+        android:layout_height="398dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="295dp"
+        android:background="@drawable/noxave1aipk91"/>"
 
 
 </RelativeLayout>
