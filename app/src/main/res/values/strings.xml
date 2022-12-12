@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">FOR THE LOVE OFGOD CAN YOU JSUT WORIK</string>
+    <string name="score">Score:</string>
+    <string name="check">Check</string>
+    <string name="eraikin_hauetatik_zeintzuk_daude_bilbon">Eraikin hauetatik, zeintzuk daude Bilbon?</string>
+    <string name="san_mames">San Mames</string>
+    <string name="azkuna_zentroa">Azkuna Zentroa</string>
+    <string name="bizkaiko_zubia">Bizkaiko Zubia</string>
+    <string name="bilboko_aireportua">Bilboko aireportua</string>
+    <string name="gaztelugatxe">Gaztelugatxe</string>
+    <string name="zein_da_bilboko_janaririk_ezagunena_edo_tipikoena">Zein da Bilboko janaririk ezagunena edo tipikoena?</string>
+    <string name="paella">Paella</string>
+    <string name="gurin_opila">Gurin-opila</string>
+    <string name="olagarroa_patatekin">Olagarroa patatekin</string>
+    <string name="pasta">Pasta</string>
+    <string name="zein_da_bilboko_jaietako_pertsonai_garrantzitsuena">Zein da Bilboko jaietako pertsonai garrantzitsuena?</string>
+    <string name="olentzero">Olentzero</string>
+    <string name="marijaia">Marijaia</string>
+    <string name="puppi_txakurra">Puppi txakurra</string>
+    <string name="bilboko_alkatea">Bilboko Alkatea</string>
+    <string name="santa_maria_basilika">Santa Maria basilika</string>
+    <string name="san_frantzisko_handiaren_errege_basilika">San Frantzisko Handiaren Errege Basilika</string>
+    <string name="bego_ako_basilika">Begoñako basilika</string>
+    <string name="done_joan_laterangoaren_basilika">Done Joan Laterangoaren basilika</string>
+    <string name="zer_ospatzen_da_bilboko_arenal_gunean">Zer ospatzen da Bilboko Arenal gunean?</string>
+    <string name="santo_tomas">Santo Tomas</string>
+    <string name="gau_beltza">Gau Beltza</string>
+    <string name="bilboko_maratoia">Bilboko maratoia</string>
+    <string name="fashion_week">Fashion week</string>
+    <string name="zein_da_bilbon_aurki_dezakegun_basilika">Zein da Bilbon aurki dezakegun basilika?</string>
 </resources>
