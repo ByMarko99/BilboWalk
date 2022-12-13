@@ -58,6 +58,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -220,8 +221,8 @@ boolean check = false;
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
         }
         videoView = v.findViewById(R.id.videoview);     // VIDEOVIEW OF XML
-
-        // video();
+        videoView.setVisibility(View.INVISIBLE);
+        // video(); //TODO undo cumment
 
 
         // Gets the MapView from the XML layout and creates it
@@ -244,7 +245,7 @@ boolean check = false;
 
                         }else {
                             here = new LatLng(location.getLatitude(), location.getLongitude());
-                            float zoomLevel = 13.5f;
+                            float zoomLevel = 16.5f;
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
                             createLocationRequest();
                             locationCallback = new LocationCallback() {
@@ -257,7 +258,7 @@ boolean check = false;
                                         if (marker1 != null){
                                             marker1.remove();
                                             initPulseEffect();
-                                               startPulseAnimation(); //TODO fix
+                                            startPulseAnimation(); //TODO fix
                                             onCameraIdle();
 
 
@@ -474,14 +475,25 @@ boolean check = false;
     public void onMapReady(final GoogleMap map) {
         this.map = map;
 
+        List<LatLng> sitios = new ArrayList<>();
+
         LatLng bilbo = new LatLng(43.256962, -2.923460);
+        sitios.add(bilbo);
         LatLng begoñako_igogailua = new LatLng(43.2605556, -2.9216667);
+        sitios.add(begoñako_igogailua);
         LatLng begoñako_basilika = new LatLng(43.25868611, -2.91384722);
+        sitios.add(begoñako_basilika);
         LatLng bilborock  = new LatLng(43.2569444, -2.9275000);
+        sitios.add(bilborock);
         LatLng arriaga_plaza  = new LatLng(43.2594444, -2.9250000);
+        sitios.add(arriaga_plaza);
         LatLng arenal   = new LatLng(43.2602778, -2.9236111);
+        sitios.add(arenal);
         LatLng alhondiga   = new LatLng(43.2597222, -2.9369444);
+        sitios.add(alhondiga);
         LatLng zuricalday_gozotegia   = new LatLng(43.2508333, -2.9427778);
+        sitios.add(zuricalday_gozotegia);
+
 
 
         map.addMarker(new MarkerOptions().position(bilbo).title("Bilbo"));
@@ -492,6 +504,17 @@ boolean check = false;
         map.addMarker(new MarkerOptions().position(arenal).title("Arenal"));
         map.addMarker(new MarkerOptions().position(alhondiga).title("Azkuna Zentroa / Alhondiga"));
         map.addMarker(new MarkerOptions().position(zuricalday_gozotegia).title("Zuricalday Gozotegia"));
+
+
+        for (int i = 0; i < sitios.size(); i++) {
+            Circle circle = map.addCircle(new CircleOptions()
+                    .center(sitios.get(i))
+                    .radius(50)
+                    .strokeColor(Color.rgb(211,211,255))
+                    .fillColor(0x220000FF)
+                    .strokeWidth(5));
+        }
+
 
 
         //map.setOnMapClickListener(this);
@@ -609,8 +632,9 @@ boolean check = false;
         if (here != null) {
             mPulseCircle = map.addCircle(new CircleOptions()
                     .center(here)
-                    .radius(0).strokeWidth(0)
+                    .radius(0).strokeWidth(3 )
                     .fillColor(mPulseEffectColor));
+
             mPulseEffectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
