@@ -1,15 +1,20 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,10 +26,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -38,8 +45,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -60,7 +71,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private @ColorInt int mPulseEffectColor;
+    private int[] mPulseEffectColorElements;
+    private ValueAnimator mPulseEffectAnimator;
+    private Circle mPulseCircle;
     private Context globalContext = null;
     LocationRequest locationRequest;
     // TODO: Rename and change types of parameters
@@ -70,8 +84,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     GoogleMap map;
 boolean check = false;
     private LocationCallback locationCallback;
-
-
+    Marker marker1;
+    MediaPlayer mediaPlayer;
     private static final String TAG = HomeFragment.class.getSimpleName();
     private CameraPosition cameraPosition;
 
@@ -93,7 +107,7 @@ boolean check = false;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     private FusedLocationProviderClient fusedLocationClient;
-
+    LatLng here;
     // Used for selecting the current place.
     private List allPoints;
     String localizacion;
@@ -114,10 +128,6 @@ boolean check = false;
         }
     };
 
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Use this factory method to create a new instance of
@@ -223,7 +233,7 @@ boolean check = false;
                                     new MyAsyncTask().execute();
 
                         }else {
-                            LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
+                            here = new LatLng(location.getLatitude(), location.getLongitude());
                             float zoomLevel = 13.5f;
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
                             map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
@@ -235,8 +245,13 @@ boolean check = false;
                                         return;
                                     }
                                     for (Location location : locationResult.getLocations()) {
-                                        LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
-                                        map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+                                        if (marker1 != null){
+                                            marker1.remove();
+                                               startPulseAnimation(); //TODO fix
+
+                                        }
+                                        here = new LatLng(location.getLatitude(), location.getLongitude());
+                                        marker1 =  map.addMarker(new MarkerOptions().position(here).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
 
                                     }
                                 }
@@ -268,23 +283,39 @@ boolean check = false;
                     //Toast.makeText(getContext(), String.valueOf(result), Toast.LENGTH_SHORT).show();
 
                     if (result == 1) {
+                        if(mediaPlayer != null){ // Evitar solapación de audios if varios clicks
+                            mediaPlayer.stop();
 
+                        }
                         bubble.setVisibility(v.VISIBLE);
                         animateText("    My name is Walter Wartwell White. I live at 308 negra arroyo.");
                         setCharacterDelay(50);
+                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa);
+                        mediaPlayer.start();
 
 
                     }else if(result == 2){
+                        if(mediaPlayer != null){
+                            mediaPlayer.stop();
 
-                        bubble.setVisibility(v.VISIBLE);
+                        }                        bubble.setVisibility(v.VISIBLE);
                         animateText("    Amongus sussy remix");
                         setCharacterDelay(50);
+                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
+                        mediaPlayer.stop();
+                        mediaPlayer.start();
 
 
                     }else{
+                        if(mediaPlayer != null){
+                            mediaPlayer.stop();
+
+                        }
                         bubble.setVisibility(v.VISIBLE);
                         animateText("    Hola niños os voy a enseñar a hacer metanfetamina");
                         setCharacterDelay(50);
+                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
+                        mediaPlayer.start();
 
                     }
                 } catch (Exception e) {
@@ -505,7 +536,69 @@ boolean check = false;
 
     } */
 
+    private void initPulseEffect() {
+        mPulseEffectColor = ContextCompat.getColor(getContext(), com.google.android.libraries.places.R.color.quantum_pink);
+        mPulseEffectColorElements = new int[] {
+                Color.red(mPulseEffectColor),
+                Color.green(mPulseEffectColor),
+                Color.blue(mPulseEffectColor)
+        };
 
+        mPulseEffectAnimator = ValueAnimator.ofFloat(0, calculatePulseRadius(map.getCameraPosition().zoom));
+        mPulseEffectAnimator.setStartDelay(3000);
+        mPulseEffectAnimator.setDuration(400);
+        mPulseEffectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+    }
+
+    private static float calculatePulseRadius(float zoomLevel) {
+        return (float) Math.pow(2, 16 - zoomLevel) * 160;
+    }
+
+
+
+        public void onCameraIdle() {
+        CameraPosition cameraPosition = map.getCameraPosition();
+        if (mPulseEffectAnimator != null)
+            mPulseEffectAnimator.setFloatValues(0, calculatePulseRadius(cameraPosition.zoom));
+    }
+
+    private void startPulseAnimation() {
+        if (mPulseCircle != null)
+            mPulseCircle.remove();
+
+        if (mPulseEffectAnimator != null) {
+            mPulseEffectAnimator.removeAllUpdateListeners();
+            mPulseEffectAnimator.removeAllListeners();
+            mPulseEffectAnimator.end();
+        }
+
+        if (here != null) {
+            mPulseCircle = map.addCircle(new CircleOptions()
+                    .center(here)
+                    .radius(0).strokeWidth(0)
+                    .fillColor(mPulseEffectColor));
+            mPulseEffectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    if (mPulseCircle == null)
+                        return;
+
+                    int alpha = (int) ((1 - valueAnimator.getAnimatedFraction()) * 128);
+                    mPulseCircle.setFillColor(Color.argb(alpha,
+                            mPulseEffectColorElements[0], mPulseEffectColorElements[1], mPulseEffectColorElements[2]));
+                    mPulseCircle.setRadius((float) valueAnimator.getAnimatedValue());
+                }
+            });
+            mPulseEffectAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mPulseEffectAnimator.setStartDelay(2000);
+                    mPulseEffectAnimator.start();
+                }
+            });
+            mPulseEffectAnimator.start();
+        }
+    }
     @Override
     public void onResume() {
         mapView.onResume();

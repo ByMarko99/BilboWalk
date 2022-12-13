@@ -26,7 +26,7 @@ public class PreguntasTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preguntastest);
+        setContentView(R.layout.test);
 
 
         button = findViewById(R.id.button);

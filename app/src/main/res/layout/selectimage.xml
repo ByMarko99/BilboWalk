@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFC8A2"
+    android:backgroundTint="#FFC8A2"
+    tools:context=".SelectImage">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
+        tools:ignore="ImageContrastCheck" />
+
+
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck6"
+        android:layout_width="158dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="33dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintEnd_toStartOf="@+id/OlentzeroBtn"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck3"
+        android:layout_width="153dp"
+        android:layout_height="222dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintStart_toEndOf="@+id/BasajaunBtn"
+        app:layout_constraintTop_toTopOf="@+id/progressBar5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck"
+        android:layout_width="164dp"
+        android:layout_height="227dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="23dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="@+id/MarijaiaBtn"
+        app:layout_constraintTop_toTopOf="@+id/progressBar3" />
+
+    <ImageButton
+        android:id="@+id/SirenaBtn"
+        android:layout_width="144dp"
+        android:layout_height="214dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="36dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OlentzeroBtn"
+        app:srcCompat="@drawable/sirena_kawaii_01" />
+
+    <ImageButton
+        android:id="@+id/OlentzeroBtn"
+        android:layout_width="154dp"
+        android:layout_height="217dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/olentzero" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCheck2"
+        android:layout_width="156dp"
+        android:layout_height="226dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="218dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar4" />
+
+    <ImageButton
+        android:id="@+id/MarijaiaBtn"
+        android:layout_width="148dp"
+        android:layout_height="218dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="156dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/satellite"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageButton
+        android:id="@+id/BasajaunBtn"
+        android:layout_width="148dp"
+        android:layout_height="218dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="412dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/basajaun_lib_copia" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="249dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="casual"
+        android:text="NOR DA MARIJAIA?"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtGuia"
+        android:layout_width="199dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="casual"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#0B0B0B"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="101dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="488dp"
+        android:background="#27FD03"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/BasajaunBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="101dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="248dp"
+        android:layout_marginBottom="488dp"
+        android:background="#FD0328"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/BasajaunBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar4"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="101dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="229dp"
+        android:background="#FD0303"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/BasajaunBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar5"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="101dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginBottom="228dp"
+        android:background="#FD0303"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/BasajaunBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
