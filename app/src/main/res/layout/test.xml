@@ -12,7 +12,9 @@
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/_ee30b754b931900732528da3c1cf5a3" />
+        android:alpha="0.8"
+        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView"

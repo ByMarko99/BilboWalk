@@ -27,12 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/_ee30b754b931900732528da3c1cf5a3" />
+        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
+        tools:ignore="ImageContrastCheck" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCheck6"

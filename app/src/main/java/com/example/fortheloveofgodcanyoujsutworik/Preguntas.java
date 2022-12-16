@@ -20,6 +20,7 @@ public class Preguntas extends AppCompatActivity {
     private Spinner spinner4;
     private Spinner spinner5;
     Button btnCheck;
+    Button btnNext2;
     TextView Score;
     // Create an ArrayList object
     @Override
@@ -50,6 +51,16 @@ public class Preguntas extends AppCompatActivity {
         spinner4.setAdapter(adapter4);
         spinner5.setAdapter(adapter5);
        // MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.AudioYeah);
+
+        btnNext2 = findViewById(R.id.btnNext2);
+        btnNext2.setOnClickListener(new View.OnClickListener() {
+            // Nos mandara a una pantalla de registro la cual nos dejara crear un usuario
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Preguntas.this, PreguntasTest.class);
+                startActivity(intent);
+            }
+        });
 
         btnCheck=findViewById(R.id.btnCheck);
         btnCheck.setOnClickListener(new View.OnClickListener() {
