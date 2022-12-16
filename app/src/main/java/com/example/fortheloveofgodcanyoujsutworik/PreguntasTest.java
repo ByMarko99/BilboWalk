@@ -24,7 +24,7 @@ public class PreguntasTest extends AppCompatActivity {
     RadioButton Marijaia;
     RadioButton Begoña;
     RadioButton SantoTomas;
-    Button btnNext2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,16 +98,6 @@ public class PreguntasTest extends AppCompatActivity {
                     textView7.setTextColor(getResources().getColor(R.color.red));
 
                 }
-
-                btnNext2 = findViewById(R.id.btnNext2);
-                btnNext2.setOnClickListener(new View.OnClickListener() {
-                    // Nos mandara a una pantalla de registro la cual nos dejara crear un usuario
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(PreguntasTest.this, Preguntas.class);
-                        startActivity(intent);
-                    }
-                });
 
             }
         });
