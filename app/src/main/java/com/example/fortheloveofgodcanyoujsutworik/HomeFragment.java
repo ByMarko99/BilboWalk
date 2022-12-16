@@ -652,7 +652,7 @@ boolean check = false;
         if (here != null) {
             mPulseCircle = map.addCircle(new CircleOptions()
                     .center(here)
-                    .radius(0).strokeWidth(3 )
+                    .radius(0)
                     .fillColor(mPulseEffectColor));
 
             mPulseEffectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
