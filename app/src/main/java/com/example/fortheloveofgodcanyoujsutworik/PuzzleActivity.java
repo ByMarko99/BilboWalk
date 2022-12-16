@@ -26,9 +26,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.elorrieta.puzzleprueba.R;
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
