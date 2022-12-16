@@ -417,7 +417,7 @@ boolean check = false;
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        builder.setMessage("Zure GPS-a desaktibatuta dago, aktibatu nahi duzu?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
@@ -652,7 +652,7 @@ boolean check = false;
         if (here != null) {
             mPulseCircle = map.addCircle(new CircleOptions()
                     .center(here)
-                    .radius(0)
+                    .radius(0).strokeWidth(0)
                     .fillColor(mPulseEffectColor));
 
             mPulseEffectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
