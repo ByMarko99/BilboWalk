@@ -1,8 +1,10 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ public class SelectImage extends AppCompatActivity {
     ProgressBar progressBar3;
     ProgressBar progressBar4;
     ProgressBar progressBar5;
+    Button btnNext;
     private KonfettiView konfettiView = null;
     private Shape.DrawableShape drawableShape = null;
 
@@ -99,6 +102,16 @@ public class SelectImage extends AppCompatActivity {
 
             }
         });
+        btnNext = findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            // Nos mandara a una pantalla de registro la cual nos dejara crear un usuario
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectImage.this, Preguntas.class);
+                startActivity(intent);
+            }
+        });
+
         SirenaBtn = findViewById(R.id.SirenaBtn);
         SirenaBtn.setOnClickListener(new View.OnClickListener() {
             // Este boton va a recoger todos los datos de el formulario

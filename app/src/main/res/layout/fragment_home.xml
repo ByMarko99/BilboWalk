@@ -62,7 +62,17 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="295dp"
-        android:background="@drawable/noxave1aipk91" />"
+        android:background="@drawable/noxave1aipk91"/>
+
+    <Button
+        android:id="@+id/btnJ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="19dp"
+        android:text="Jugar" />"
 
 
 </RelativeLayout>

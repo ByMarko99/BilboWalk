@@ -8,11 +8,30 @@
     android:backgroundTint="#00E676"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext2"
+        android:layout_width="72dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:background="@drawable/button_rounded_border"
+        android:fontFamily="casual"
+        android:text="Next"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.936" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/_ee30b754b931900732528da3c1cf5a3" />
 
     <androidx.appcompat.widget.AppCompatButton

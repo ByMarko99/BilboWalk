@@ -8,6 +8,20 @@
     android:backgroundTint="#FFC8A2"
     tools:context=".SelectImage">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="72dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/button_rounded_border"
+        android:fontFamily="casual"
+        android:text="Next"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
@@ -22,51 +36,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck6"
-        android:layout_width="158dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="33dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintEnd_toStartOf="@+id/OlentzeroBtn"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck3"
-        android:layout_width="153dp"
-        android:layout_height="222dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="21dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toEndOf="@+id/BasajaunBtn"
-        app:layout_constraintTop_toTopOf="@+id/progressBar5" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck"
-        android:layout_width="164dp"
-        android:layout_height="227dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="23dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toStartOf="@+id/MarijaiaBtn"
-        app:layout_constraintTop_toTopOf="@+id/progressBar3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/SirenaBtn"
-        android:layout_width="144dp"
-        android:layout_height="214dp"
+        android:layout_width="142dp"
+        android:layout_height="209dp"
+        android:layout_marginStart="43dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="36dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/BasajaunBtn"
         app:layout_constraintTop_toBottomOf="@+id/OlentzeroBtn"
         app:srcCompat="@drawable/sirena_kawaii_01" />
 
@@ -74,33 +62,27 @@
         android:id="@+id/OlentzeroBtn"
         android:layout_width="154dp"
         android:layout_height="217dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/MarijaiaBtn"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar3"
         app:srcCompat="@drawable/olentzero" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck2"
-        android:layout_width="156dp"
-        android:layout_height="226dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="218dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar4" />
 
     <ImageButton
         android:id="@+id/MarijaiaBtn"
         android:layout_width="148dp"
-        android:layout_height="218dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="156dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="222dp"
         android:contentDescription="@string/app_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/konfettiView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar2"
         app:srcCompat="@drawable/satellite"
         tools:ignore="ImageContrastCheck" />
 
@@ -108,9 +90,11 @@
         android:id="@+id/BasajaunBtn"
         android:layout_width="148dp"
         android:layout_height="218dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="412dp"
+        android:layout_marginEnd="231dp"
         android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/basajaun_lib_copia" />
