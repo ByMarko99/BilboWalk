@@ -13,7 +13,7 @@ import java.time.Duration;
 
 public class SplashScreen extends Activity {
 
-    private final int DURATION_SPLASH = 1500; // El delay
+    private final int DURATION_SPLASH = 2000; // El delay
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
