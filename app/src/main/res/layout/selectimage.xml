@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.8"
-        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
+        android:background="@drawable/fondojokoak"
         tools:ignore="ImageContrastCheck" />
 
 
@@ -56,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/BasajaunBtn"
         app:layout_constraintTop_toBottomOf="@+id/OlentzeroBtn"
-        app:srcCompat="@drawable/sirena_kawaii_01" />
+        app:srcCompat="@drawable/sirenakawaii" />
 
     <ImageButton
         android:id="@+id/OlentzeroBtn"
@@ -83,7 +83,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/progressBar2"
-        app:srcCompat="@drawable/satellite"
+        app:srcCompat="@drawable/marijaia"
         tools:ignore="ImageContrastCheck" />
 
     <ImageButton

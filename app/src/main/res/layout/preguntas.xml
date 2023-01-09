@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.8"
-        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
+        android:background="@drawable/fondojokoak"
         tools:ignore="ImageContrastCheck" />
 
 
@@ -63,7 +63,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/_8863414_no_comer_y_beber_icono_ning_n_alimento_o_bebida_s_mbolo_aislado_en_fondo_blanco_no_comer_y_no_bebida" />
+        app:srcCompat="@drawable/nocomerbeber" />
 
     <ImageView
         android:id="@+id/Zentro"
@@ -73,7 +73,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoCorrer"
-        app:srcCompat="@drawable/azkuna_zentroa_atrio_columnas_1920x960" />
+        app:srcCompat="@drawable/azkunacolumnas" />
 
     <ImageView
         android:id="@+id/Silencio"
@@ -83,7 +83,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Zentro"
-        app:srcCompat="@drawable/educatodo_senaletica_senal_individual_silencio_22513241882775_800x" />
+        app:srcCompat="@drawable/isiltasuna" />
 
     <Spinner
         android:id="@+id/spinner1"
@@ -179,7 +179,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoComer"
-        app:srcCompat="@drawable/istockphoto_688314882_612x612" />
+        app:srcCompat="@drawable/nogritar" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCheck3"
@@ -200,7 +200,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoGritar"
-        app:srcCompat="@drawable/_58081711_no_ejecute_la_ilustraci_n_de_la_se_al" />
+        app:srcCompat="@drawable/nocorrer" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCheck4"
