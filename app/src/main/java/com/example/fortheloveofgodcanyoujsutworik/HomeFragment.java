@@ -1,14 +1,19 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.InstrumentationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -39,6 +44,7 @@ import android.widget.VideoView;
 import androidx.annotation.ColorInt;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.IntentCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -58,6 +64,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +78,6 @@ import java.util.Random;
  */
 public class HomeFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, GoogleMap.OnMapClickListener  {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -81,7 +87,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private Circle mPulseCircle;
     private Context globalContext = null;
     LocationRequest locationRequest;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     MapView mapView;
@@ -145,7 +150,6 @@ boolean check = false;
      * @param param2 Parameter 2.
      * @return A new instance of fragment HomeFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -190,15 +194,22 @@ boolean check = false;
                 @Override
                 public void run() { // Una vez habre el intent de ajustes empieza a comprobar cada un segundo si se ha activado o no
                     //    getLocation();
+                    // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
+                    // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
+
                     // Toast.makeText(getContext(), "aaaa", Toast.LENGTH_SHORT).show();
                     if(canGetLocation()){ // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
-                        Intent intent = new Intent(getActivity(), SplashScreen.class);
-                        startActivity(intent);
-                    //    fragmentTransaction.remove(HomeFragment.this).commit();
+
+                        //    fragmentTransaction.remove(HomeFragment.this).commit();
                         try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
-                            getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
-                        } catch (Throwable e) {
+                           // getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
+                            ProcessPhoenix.triggerRebirth(getContext()); //TODO fixed crash
+
+
+                        } catch (Exception e) {
                             e.printStackTrace();
+                           // Intent intent2 = new Intent(getActivity(), SplashScreen.class);
+                           // startActivity(intent2);
                         }
 
 
@@ -208,6 +219,7 @@ boolean check = false;
             }, 300);
         }
     }
+
 
 
     @SuppressLint("MissingPermission")
@@ -243,25 +255,34 @@ boolean check = false;
 
                         if (location == null) {
 
-                                    new MyAsyncTask().execute();
+                                    new MyAsyncTask().execute(); // I forgor que hace💀💀
+                            // asks for gps eprmission
 
                         }else {
                             here = new LatLng(location.getLatitude(), location.getLongitude());
-                            float zoomLevel = 16.5f;
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
+                            // float zoomLevel = 16.5f;
+                            CameraPosition cameraPosition = new CameraPosition.Builder().
+                                    target(here).
+                                    tilt(60).
+                                    zoom(15).
+                                    bearing(0).
+                                    build();
+
+                            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                          //  map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
                             createLocationRequest();
-                            locationCallback = new LocationCallback() {
+                            locationCallback = new LocationCallback() { // Callback?????????? looper????
                                 @Override
                                 public void onLocationResult(LocationResult locationResult) {
                                     if (locationResult == null) {
                                         return;
                                     }
-                                    for (Location location : locationResult.getLocations()) {
+                                    for (Location location : locationResult.getLocations()) { // 💀💀💀💀 ????
                                         if (marker1 != null){
-                                            marker1.remove();
+                                            marker1.remove(); // Quita walter jr y pone uno nuevo si existe
                                             initPulseEffect();
-                                            startPulseAnimation(); //TODO fix
-                                            onCameraIdle();
+                                            startPulseAnimation(); //TODO fix        EDIT nuevo: fixED
+                                            onCameraIdle(); // Ajusta el pulso on zoom
 
 
                                         }
@@ -271,7 +292,8 @@ boolean check = false;
                                     }
                                 }
                             };
-                            startLocationUpdates();
+                            startLocationUpdates(); // Crea un looper en el que pide la la localizacion y luego ejecuta lo de arriba para poner el marker
+                            // AAAAA reaches here after returning null? gets location enters locationcallback forever???
 
                         }
 
@@ -412,6 +434,7 @@ boolean check = false;
     public void setCharacterDelay(long millis) {
         mDelay = millis;
     }
+
 
 
 
@@ -585,7 +608,6 @@ boolean check = false;
 
             // TennisAppActivity.showDialog(add);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -593,7 +615,7 @@ boolean check = false;
 
     } */
 
-    public void video(){
+    public void video(){ // spawn this on radius
         String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.agurra;    // MP4 PATH
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
