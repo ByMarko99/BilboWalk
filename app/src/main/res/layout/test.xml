@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.8"
-        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
+        android:background="@drawable/fondojokoak"
         tools:ignore="ImageContrastCheck" />
 
     <ImageView
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/toy_train_154101__480" />
+        app:srcCompat="@drawable/trenjuguete" />
 
     <TextView
         android:id="@+id/txtPregunta"
