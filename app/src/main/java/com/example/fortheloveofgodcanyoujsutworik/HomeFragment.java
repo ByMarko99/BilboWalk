@@ -127,6 +127,10 @@ boolean check = false;
     TextView bubble;
     Drawable marker;
     private static View v;
+    boolean alreadyExecuted = false;
+
+    public static final List<LatLng> sitios = new ArrayList<>();
+   private float[][] results = new float[9][1];
     private CharSequence mText;
     private int mIndex;
     private long mDelay = 500;
@@ -203,7 +207,7 @@ boolean check = false;
                         //    fragmentTransaction.remove(HomeFragment.this).commit();
                         try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
                            // getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
-                            ProcessPhoenix.triggerRebirth(getContext()); //TODO fixed crash
+                            ProcessPhoenix.triggerRebirth(getContext()); //TODO fixed crash // Y el fénix resurgió de sus cenizas
 
 
                         } catch (Exception e) {
@@ -217,6 +221,24 @@ boolean check = false;
                     ha.postDelayed(this, 300);
                 }
             }, 300);
+        }
+    }
+
+    private class MyAsyncTaskDistance extends AsyncTask<Void, Void, Void> // Bro?
+    {
+        protected Void doInBackground(Void... params) {
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            final Handler ha=new Handler();
+            ha.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getDistanceBetween();
+                    ha.postDelayed(this, 800);
+                }
+            }, 800);
         }
     }
 
@@ -234,15 +256,14 @@ boolean check = false;
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
         }
-        videoView = v.findViewById(R.id.videoview);     // VIDEOVIEW OF XML
-        videoView.setVisibility(View.INVISIBLE);
-        // video(); //TODO undo cumment
+
 
 
         // Gets the MapView from the XML layout and creates it
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
-
+        videoView = v.findViewById(R.id.videoview);     // VIDEOVIEW OF XML
+        videoView.setVisibility(View.INVISIBLE);
 
         mapView.getMapAsync(this);
 
@@ -264,7 +285,7 @@ boolean check = false;
                             CameraPosition cameraPosition = new CameraPosition.Builder().
                                     target(here).
                                     tilt(60).
-                                    zoom(15).
+                                    zoom(19).
                                     bearing(0).
                                     build();
 
@@ -286,8 +307,11 @@ boolean check = false;
 
 
                                         }
+
                                         here = new LatLng(location.getLatitude(), location.getLongitude());
                                         marker1 =  map.addMarker(new MarkerOptions().position(here).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
+
+
 
                                     }
                                 }
@@ -309,7 +333,6 @@ boolean check = false;
         Random r = new Random();
         int low = 1;
         int high = 4; // 3
-
 
         walter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -391,6 +414,7 @@ boolean check = false;
 
 
         });
+        new MyAsyncTaskDistance().execute();
 
         return v;
     }
@@ -437,6 +461,40 @@ boolean check = false;
 
 
 
+    public void getDistanceBetween(){
+        for (int i = 0; i < sitios.size(); i++) {
+            Location.distanceBetween(here.latitude, here.longitude,
+                    sitios.get(i).latitude, sitios.get(i).longitude, results[i]);
+
+
+
+        }
+
+        if( results[0][0] <  50 ){
+
+        }else if ( results[1][0] <  50 ){
+
+        }else if ( results[2][0] <  50 ){
+
+        }else if ( results[3][0] <  50 ){
+
+        }else if ( results[4][0] <  50 ){
+
+        }else if ( results[5][0] <  50 ){
+
+        }else if ( results[6][0] <  50 ){
+
+        }else if ( results[7][0] <  50 ){
+
+        }else if ( results[8][0] <  50 ){
+            if(!alreadyExecuted){
+                   videoView.setVisibility(View.VISIBLE);
+                   video();
+                   alreadyExecuted = true;
+               }
+
+        }
+    }
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -518,7 +576,6 @@ boolean check = false;
     public void onMapReady(final GoogleMap map) {
         this.map = map;
 
-        List<LatLng> sitios = new ArrayList<>();
 
         LatLng bilbo = new LatLng(43.256962, -2.923460);
         sitios.add(bilbo);
@@ -536,6 +593,8 @@ boolean check = false;
         sitios.add(alhondiga);
         LatLng zuricalday_gozotegia   = new LatLng(43.2508333, -2.9427778);
         sitios.add(zuricalday_gozotegia);
+        LatLng prueba   = new LatLng(43.283481, -2.965251);
+        sitios.add(prueba);
 
 
 
@@ -557,6 +616,9 @@ boolean check = false;
                     .fillColor(0x220000FF)
                     .strokeWidth(5));
         }
+
+        //TODO borrar
+
 
 
 
