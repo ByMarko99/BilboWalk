@@ -34,7 +34,7 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="28dp"
         android:scaleType="fitXY"
-        android:src="@drawable/noxave1aipk91" />
+        android:src="@drawable/mascota" />
 
     <TextView
         android:id="@+id/msgView"
@@ -62,7 +62,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="295dp"
-        android:background="@drawable/noxave1aipk91"/>
+        android:background="@drawable/mascota" />
 
     <Button
         android:id="@+id/btnJ"

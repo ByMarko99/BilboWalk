@@ -4,9 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background = "@drawable/gradient_background">
+    android:background="#389F4E"
+    android:backgroundTint="#00E676"
+    tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -38,7 +46,6 @@
         android:background="@drawable/button_rounded_border"
         android:fontFamily="casual"
         android:text="@string/check"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toStartOf="parent"

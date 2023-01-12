@@ -54,6 +54,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     implementation "com.google.android.gms:play-services-location:21.0.1"
     implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+    implementation 'com.jakewharton:process-phoenix:2.1.2'
 
 
 
