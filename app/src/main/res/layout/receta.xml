@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Receta"
+    android:background = "@drawable/gradient_background">
+
+
+    <EditText
+        android:id="@+id/Numero3"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/Numero4"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="364dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="casual"
+        android:text="Gero, 50-60 gramo inguruko bolak osatu, 9 cm inguru luzatu eta gainazal lau batean jarri, 2-3 orduz 40º inguruan pausatzen uzteko. Igurtzi arrautzarekin eta bota azukre pixka bat gainetik. Egosi 200º ingurura labea aurrez berotuta, 8 minutuz. Hoztu ondoren, erditik moztu eta gurinezko kremarekin igurtzi. "
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="365dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="208dp"
+        android:fontFamily="casual"
+        android:text="Hasteko, elikagaiak mahai gainean jarriko ditugu eta Gurin-opila egiten hasiko gara."
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="379dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="316dp"
+        android:fontFamily="casual"
+        android:text="Azkenik, gurin krema egiteko, ura azukrearekin irakiten jarriko dugu, xarabe bat egin arte. Utzi 30º-35º bitartean hozten, eta gehitu gurin leundua eta, ondoren, arrautza-gorringoa. Irabiatu etengabe, nahi den ehundura harroa eta kolore zurixkako krema lortu arte. "
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="380dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="64dp"
+        android:fontFamily="casual"
+        android:text="Elikagaiak klasifikatu ondoren,  lotu arrautzak, gurin girotua, azukrea eta gatza oragailuan. Nahastu dena ur pixka batekin minutu batzuetan.  Gehitu irina eta ura pixkanaka, eta oratu 35 minutuz masa elastikoa lortu arte. Utzi orea 10 minutuz pausatzen eta, azkenik, gehitu legamia eta pixkanaka-pixkanaka uretatik geratzen dena."
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/btnComp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/Numero1"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/Numero2"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="SpeakableTextPresentCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC8A2"
-    android:backgroundTint="#FFC8A2"
-    tools:context=".SelectImage">
+    tools:context=".SelectImage"
+    android:background = "@drawable/gradient_background">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
@@ -22,13 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.954" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.8"
-        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
-        tools:ignore="ImageContrastCheck" />
 
 
     <nl.dionsegijn.konfetti.xml.KonfettiView

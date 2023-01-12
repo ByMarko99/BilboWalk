@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#389F4E"
-    android:backgroundTint="#00E676"
+    android:background = "@drawable/gradient_background"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatButton
@@ -22,25 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.936" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.8"
-        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
-        tools:ignore="ImageContrastCheck" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck6"
-        android:layout_width="106dp"
-        android:layout_height="104dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner5"
@@ -61,16 +41,20 @@
         android:layout_height="95dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="20dp"
+        android:background="#1d00ff"
+        android:padding="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_8863414_no_comer_y_beber_icono_ning_n_alimento_o_bebida_s_mbolo_aislado_en_fondo_blanco_no_comer_y_no_bebida" />
 
     <ImageView
         android:id="@+id/Zentro"
-        android:layout_width="95dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="110dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="#1d00ff"
+        android:padding="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoCorrer"
         app:srcCompat="@drawable/azkuna_zentroa_atrio_columnas_1920x960" />
@@ -79,8 +63,10 @@
         android:id="@+id/Silencio"
         android:layout_width="92dp"
         android:layout_height="94dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:background="#1d00ff"
+        android:padding="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Zentro"
         app:srcCompat="@drawable/educatodo_senaletica_senal_individual_silencio_22513241882775_800x" />
@@ -103,11 +89,11 @@
         android:layout_width="185dp"
         android:layout_height="48dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner1"
-        app:layout_constraintVertical_bias="0.095"
+        app:layout_constraintVertical_bias="0.114"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
@@ -120,7 +106,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        app:layout_constraintVertical_bias="0.153"
+        app:layout_constraintVertical_bias="0.11"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
@@ -140,8 +126,8 @@
         android:id="@+id/btnCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/button_rounded_border"
         android:fontFamily="casual"
         android:text="Check"
@@ -149,48 +135,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck2"
-        android:layout_width="102dp"
-        android:layout_height="101dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCheck3" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck5"
-        android:layout_width="104dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="17dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCheck6" />
-
     <ImageView
         android:id="@+id/NoGritar"
-        android:layout_width="103dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="93dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
+        android:background="#1d00ff"
+        android:padding="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoComer"
         app:srcCompat="@drawable/istockphoto_688314882_612x612" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck3"
-        android:layout_width="104dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NoCorrer" />
 
     <ImageView
         android:id="@+id/NoCorrer"
@@ -198,30 +153,10 @@
         android:layout_height="96dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
+        android:background="#1d00ff"
+        android:padding="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoGritar"
         app:srcCompat="@drawable/_58081711_no_ejecute_la_ilustraci_n_de_la_se_al" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCheck4"
-        android:layout_width="102dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_rounded_border"
-        android:clickable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCheck5" />
-
-    <TextView
-        android:id="@+id/Score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginBottom="44dp"
-        android:text="TextView"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
