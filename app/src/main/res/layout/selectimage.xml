@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC8A2"
-    android:backgroundTint="#FFC8A2"
+    android:background = "@drawable/gradient_background"
     tools:context=".SelectImage">
 
     <androidx.appcompat.widget.AppCompatButton
@@ -22,13 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.954" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.8"
-        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
-        tools:ignore="ImageContrastCheck" />
+
 
 
     <nl.dionsegijn.konfetti.xml.KonfettiView
@@ -52,11 +45,13 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="36dp"
         android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/BasajaunBtn"
         app:layout_constraintTop_toBottomOf="@+id/OlentzeroBtn"
-        app:srcCompat="@drawable/sirena_kawaii_01" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/sirenakawaii" />
 
     <ImageButton
         android:id="@+id/OlentzeroBtn"
@@ -81,22 +76,22 @@
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="@+id/konfettiView"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+
         app:layout_constraintTop_toBottomOf="@+id/progressBar2"
-        app:srcCompat="@drawable/satellite"
+        app:srcCompat="@drawable/marijaia"
         tools:ignore="ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/BasajaunBtn"
         android:layout_width="148dp"
         android:layout_height="218dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="412dp"
-        android:layout_marginEnd="231dp"
+        android:layout_marginStart="40dp"
         android:contentDescription="@string/app_name"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.769"
         app:srcCompat="@drawable/basajaun_lib_copia" />
 
     <TextView

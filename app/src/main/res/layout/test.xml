@@ -2,19 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background = "@drawable/gradient_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#389F4E"
-    android:backgroundTint="#00E676"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.8"
-        android:background="@drawable/_ee30b754b931900732528da3c1cf5a3"
-        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/toy_train_154101__480" />
+        app:srcCompat="@drawable/trenjuguete" />
 
     <TextView
         android:id="@+id/txtPregunta"
@@ -34,14 +25,16 @@
         android:layout_marginTop="624dp"
         android:fontFamily="casual"
         android:text="@string/score"
+        android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/button_rounded_border"
         android:fontFamily="casual"

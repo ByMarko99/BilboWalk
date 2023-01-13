@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -41,6 +43,7 @@ public class SelectImage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selectimage);
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
 
         final Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_heart);
         drawableShape = new Shape.DrawableShape(drawable, true);
@@ -69,13 +72,28 @@ public class SelectImage extends AppCompatActivity {
             public void onClick(View view) {
                 txtGuia.setVisibility(View.VISIBLE);
                 txtGuia.setText("OSO ONDO");
+                OlentzeroBtn.setImageResource(R.drawable._f973);
+                BasajaunBtn.setImageResource(R.drawable._f973);
+                SirenaBtn.setImageResource(R.drawable._f973);
+                OlentzeroBtn.setBackgroundResource(R.color.transparent);
+                BasajaunBtn.setBackgroundResource(R.color.transparent);
+                SirenaBtn.setBackgroundResource(R.color.transparent);
+
+                OlentzeroBtn.startAnimation(animShake);
+                SirenaBtn.startAnimation(animShake);
+                BasajaunBtn.startAnimation(animShake);
+
+                OlentzeroBtn.setEnabled(false);
+                SirenaBtn.setEnabled(false);
+                BasajaunBtn.setEnabled(false);
+
                 progressBar2.setVisibility(View.VISIBLE);
                 progressBar3.setVisibility(View.INVISIBLE);
                 progressBar4.setVisibility(View.INVISIBLE);
                 progressBar5.setVisibility(View.INVISIBLE);
                 konfettiView.start(party);
-                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ninios);
-                mediaPlayer.start(); // no need to call prepare(); create() does that for you
+               // MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ninios);
+               // mediaPlayer.start(); // no need to call prepare(); create() does that for you
 
 
             }
@@ -87,6 +105,7 @@ public class SelectImage extends AppCompatActivity {
                 txtGuia.setVisibility(View.VISIBLE);
                 txtGuia.setText("EZ !!!! Hau da Olentzero");
                 progressBar3.setVisibility(View.VISIBLE);
+                progressBar3.startAnimation(animShake);
                 progressBar2.setVisibility(View.INVISIBLE);
                 progressBar4.setVisibility(View.INVISIBLE);
                 progressBar5.setVisibility(View.INVISIBLE);
@@ -100,6 +119,7 @@ public class SelectImage extends AppCompatActivity {
                 txtGuia.setVisibility(View.VISIBLE);
                 txtGuia.setText("Ezezez hau da basajaun");
                 progressBar4.setVisibility(View.VISIBLE);
+                progressBar4.startAnimation(animShake);
                 progressBar3.setVisibility(View.INVISIBLE);
                 progressBar2.setVisibility(View.INVISIBLE);
                 progressBar5.setVisibility(View.INVISIBLE);
@@ -123,6 +143,7 @@ public class SelectImage extends AppCompatActivity {
                 txtGuia.setVisibility(View.VISIBLE);
                 txtGuia.setText("WTF you stupid motherfocker");
                 progressBar5.setVisibility(View.VISIBLE);
+                progressBar5.startAnimation(animShake);
                 progressBar3.setVisibility(View.INVISIBLE);
                 progressBar4.setVisibility(View.INVISIBLE);
                 progressBar2.setVisibility(View.INVISIBLE);
