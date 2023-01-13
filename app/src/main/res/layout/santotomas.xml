@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background = "@drawable/gradient_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Santotomas">
+
+
+    <Spinner
+        android:id="@+id/spinnerSAN"
+        style="@style/spinner_style"
+        android:layout_width="355dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toTopOf="@+id/btnComprobar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnComprobar"
+        android:layout_width="124dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="116dp"
+        android:background="@drawable/button_rounded_border"
+        android:clickable="false"
+        android:fontFamily="casual"
+        android:text="@string/check"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="104dp"
+        android:background="#000000"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerSAN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/screenshot_1" />
+
+    <TextView
+        android:id="@+id/textViewFeliz"
+        android:layout_width="185dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="casual"
+        android:text="OSO ONDO "
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
