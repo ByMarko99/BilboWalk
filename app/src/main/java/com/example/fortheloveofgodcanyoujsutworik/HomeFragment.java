@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.InstrumentationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -24,6 +25,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -61,6 +63,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,7 +96,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     GoogleMap map;
     VideoView videoView;
     Button btnJ;
-boolean check = false;
+    CountDownTimer Timer = null;
+    boolean check = false;
     private LocationCallback locationCallback;
     Marker marker1;
     MediaPlayer mediaPlayer;
@@ -101,6 +105,7 @@ boolean check = false;
     private CameraPosition cameraPosition;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialogpop;
+    boolean mantenido = false;
 
     // The entry point to the Places API.
     //private PlacesClient placesClient;
@@ -126,11 +131,13 @@ boolean check = false;
     String localizacion;
     TextView bubble;
     Drawable marker;
+    Drawable markerdev;
+
     private static View v;
     boolean alreadyExecuted = false;
 
     public static final List<LatLng> sitios = new ArrayList<>();
-   private float[][] results = new float[9][1];
+   private float[][] results = new float[8][1];
     private CharSequence mText;
     private int mIndex;
     private long mDelay = 500;
@@ -141,6 +148,17 @@ boolean check = false;
             bubble.setText(mText.subSequence(0, mIndex++));
             if(mIndex <= mText.length()) {
                 mHandler.postDelayed(characterAdder, mDelay);
+            }
+        }
+    };
+
+    private Runnable characterAdder2 = new Runnable() {
+        @Override
+        public void run() {
+
+            bubble.setText("   Bravo six, " + (mText.subSequence(0, mIndex++)));
+            if(mIndex <= mText.length()) {
+                mHandler.postDelayed(characterAdder2, mDelay);
             }
         }
     };
@@ -244,7 +262,7 @@ boolean check = false;
 
 
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint({"MissingPermission", "ClickableViewAccessibility"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -300,10 +318,11 @@ boolean check = false;
                                     }
                                     for (Location location : locationResult.getLocations()) { // 💀💀💀💀 ????
                                         if (marker1 != null){
-                                            marker1.remove(); // Quita walter jr y pone uno nuevo si existe
+                                            marker1.remove();
+                                            onCameraIdle();// Quita walter jr y pone uno nuevo si existe
                                             initPulseEffect();
                                             startPulseAnimation(); //TODO fix        EDIT nuevo: fixED
-                                            onCameraIdle(); // Ajusta el pulso on zoom
+                                            // Ajusta el pulso on zoom
 
 
                                         }
@@ -342,6 +361,9 @@ boolean check = false;
                     int result = r.nextInt(high - low) + low;
                     //Toast.makeText(getContext(), String.valueOf(result), Toast.LENGTH_SHORT).show();
 
+                    if (!mantenido){
+
+
                     if (result == 1) {
                         if(mediaPlayer != null){ // Evitar solapación de audios if varios clicks
                             mediaPlayer.stop();
@@ -377,11 +399,65 @@ boolean check = false;
                         mediaPlayer.start();
 
                     }
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(), "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+
+
+        walter.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // start your timer
+                    Timer = new CountDownTimer(7000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        public void onFinish() {
+                            if(mediaPlayer != null){
+                                mediaPlayer.stop();
+
+                            }
+                            walter.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.devmode));
+                            markerdev = getResources().getDrawable(R.drawable.tvbackgrounddev);
+                            bubble.setBackground(markerdev);
+                            bubble.setVisibility(v.VISIBLE);
+                            animateText("   Bravo six, ");
+                            setCharacterDelay(50);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    animateText2("going dark");
+                                    setCharacterDelay(50);
+
+                                                                   }
+                            }, 2000);
+
+                            mediaPlayer = MediaPlayer.create(getContext(), R.raw.bravosix);
+                            mediaPlayer.start();
+                            mantenido = true;
+                            onMapReady2(map);
+
+                        }
+
+                    };
+                    Timer.start();
+
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+
+
+
+                }
+                return false;
             }
         });
 
@@ -455,6 +531,16 @@ boolean check = false;
 
     }
 
+    public void animateText2(CharSequence text) {
+        mText = text;
+        mIndex = 0;
+
+
+        mHandler.removeCallbacks(characterAdder2);
+        mHandler.postDelayed(characterAdder2, mDelay);
+
+    }
+
     public void setCharacterDelay(long millis) {
         mDelay = millis;
     }
@@ -486,14 +572,14 @@ boolean check = false;
 
         }else if ( results[7][0] <  50 ){
 
-        }else if ( results[8][0] <  50 ){
-            if(!alreadyExecuted){
+        }/*else if ( results[8][0] <  50 ){
+            if(!alreadyExecuted){                                   //TODO radius maximus
                    videoView.setVisibility(View.VISIBLE);
                    video();
                    alreadyExecuted = true;
                }
 
-        }
+        }*/
     }
 
     private void buildAlertMessageNoGps() {
@@ -593,19 +679,19 @@ boolean check = false;
         sitios.add(alhondiga);
         LatLng zuricalday_gozotegia   = new LatLng(43.2508333, -2.9427778);
         sitios.add(zuricalday_gozotegia);
-        LatLng prueba   = new LatLng(43.283481, -2.965251);
-        sitios.add(prueba);
+        //LatLng prueba   = new LatLng(43.283481, -2.965251);
+        //sitios.add(prueba);
 
 
 
-        map.addMarker(new MarkerOptions().position(bilbo).title("Bilbo"));
-        map.addMarker(new MarkerOptions().position(begoñako_igogailua).title("Begoñako Igogailua"));
-        map.addMarker(new MarkerOptions().position(begoñako_basilika).title("Begoñako Basilika"));
-        map.addMarker(new MarkerOptions().position(bilborock).title("Bilborock"));
-        map.addMarker(new MarkerOptions().position(arriaga_plaza).title("Arriaga Plaza"));
-        map.addMarker(new MarkerOptions().position(arenal).title("Arenal"));
-        map.addMarker(new MarkerOptions().position(alhondiga).title("Azkuna Zentroa / Alhondiga"));
-        map.addMarker(new MarkerOptions().position(zuricalday_gozotegia).title("Zuricalday Gozotegia"));
+        map.addMarker(new MarkerOptions().position(bilbo).title("Bilbo").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
+        map.addMarker(new MarkerOptions().position(begoñako_igogailua).title("Begoñako Igogailua").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
+        map.addMarker(new MarkerOptions().position(begoñako_basilika).title("Begoñako Basilika").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
+        map.addMarker(new MarkerOptions().position(bilborock).title("Bilborock").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
+        map.addMarker(new MarkerOptions().position(arriaga_plaza).title("Arriaga Plaza").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
+        map.addMarker(new MarkerOptions().position(arenal).title("Arenal").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
+        map.addMarker(new MarkerOptions().position(alhondiga).title("Azkuna Zentroa / Alhondiga").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
+        map.addMarker(new MarkerOptions().position(zuricalday_gozotegia).title("Zuricalday Gozotegia").icon(BitmapDescriptorFactory.fromResource(R.raw.color_icons_green_home)));
 
 
         for (int i = 0; i < sitios.size(); i++) {
@@ -625,6 +711,25 @@ boolean check = false;
         //map.setOnMapClickListener(this);
 
 
+    }
+
+    public void onMapReady2 (final  GoogleMap map) {
+
+        this.map = map;
+
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = map.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            getContext(), R.raw.style));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
     }
 
 
