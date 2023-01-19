@@ -97,7 +97,7 @@ public class Santotomas extends AppCompatActivity {
                         textViewFeliz.setText("GAINDITU DUZU");
                         textViewFeliz.setVisibility(View.VISIBLE);
                         textViewFeliz.startAnimation(animationScale);
-                        imageView.setImageResource(R.drawable._f973);
+                        imageView.setImageResource(R.drawable.happy_emoji);
                         spinnerSAN.setVisibility(View.INVISIBLE);
                         imageView.startAnimation(animShake);
                         btnComprobar.setVisibility(View.INVISIBLE);
