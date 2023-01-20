@@ -2,7 +2,6 @@ package com.example.fortheloveofgodcanyoujsutworik;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -72,9 +71,9 @@ public class SelectImage extends AppCompatActivity {
             public void onClick(View view) {
                 txtGuia.setVisibility(View.VISIBLE);
                 txtGuia.setText("OSO ONDO");
-                OlentzeroBtn.setImageResource(R.drawable._f973);
-                BasajaunBtn.setImageResource(R.drawable._f973);
-                SirenaBtn.setImageResource(R.drawable._f973);
+                OlentzeroBtn.setImageResource(R.drawable.happy_emoji);
+                BasajaunBtn.setImageResource(R.drawable.happy_emoji);
+                SirenaBtn.setImageResource(R.drawable.happy_emoji);
                 OlentzeroBtn.setBackgroundResource(R.color.transparent);
                 BasajaunBtn.setBackgroundResource(R.color.transparent);
                 SirenaBtn.setBackgroundResource(R.color.transparent);

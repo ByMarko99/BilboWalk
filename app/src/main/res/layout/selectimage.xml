@@ -7,6 +7,7 @@
     android:background = "@drawable/gradient_background"
     tools:context=".SelectImage">
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         android:layout_width="72dp"
@@ -92,14 +93,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.769"
-        app:srcCompat="@drawable/basajaun_lib_copia" />
+        app:srcCompat="@drawable/basajaun_cartoon" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="249dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="312dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="casual"
         android:text="NOR DA MARIJAIA?"
         android:textSize="34sp"
@@ -112,7 +113,7 @@
         android:layout_width="199dp"
         android:layout_height="29dp"
         android:layout_marginEnd="104dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="28dp"
         android:fontFamily="casual"
         android:text="TextView"
         android:textAlignment="center"
