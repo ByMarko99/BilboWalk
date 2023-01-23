@@ -478,7 +478,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
                     //    fragmentTransaction.remove(HomeFragment.this).commit();
                     try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
-                        Intent intent = new Intent(getActivity(), SelectImage.class);
+                        Intent intent = new Intent(getActivity(), PreguntasTest.class);
                         startActivity(intent);
 
                     } catch (Throwable e) {

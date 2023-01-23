@@ -34,7 +34,7 @@ TextView textView4;
         btnComp = findViewById(R.id.btnComp);
         textView = findViewById(R.id.textView);
         textView2 = findViewById(R.id.textView2);
-            textView3 = findViewById(R.id.textView3);
+        textView3 = findViewById(R.id.textView3);
         textView4 = findViewById(R.id.textView4);
 
         final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
