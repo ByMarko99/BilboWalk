@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondojokoak">
+    android:background="@drawable/gradient_background">
 
     <ScrollView
         android:layout_width="337dp"
@@ -33,13 +33,13 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/basajaun2" />
+                    tools:srcCompat="@drawable/AzkunaTxartelakCandado" />
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/happy_emoji" />
+                    tools:srcCompat="@drawable/GaldetegiaCandado" />
             </LinearLayout>
             <!-- JUEGOS -->
             <LinearLayout
@@ -54,7 +54,7 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/basajaun2" />
+                    tools:srcCompat="@drawable/NorDaMarijaiaCandado" />
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="50dp"
