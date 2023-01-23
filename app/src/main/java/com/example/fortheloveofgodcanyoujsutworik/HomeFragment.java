@@ -113,20 +113,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    // A default location (Sydney, Australia) and default zoom to use when location permission is
-    // not granted.
-
-
-    // The geographical location where the device is currently located. That is, the last-known
-    // location retrieved by the Fused Location Provider.
     private Location lastKnownLocation;
     ImageView walter;
-    // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     private FusedLocationProviderClient fusedLocationClient;
     LatLng here;
-    // Used for selecting the current place.
     private List allPoints;
     String localizacion;
     TextView bubble;

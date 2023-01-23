@@ -57,7 +57,6 @@ public class TouchListener implements View.OnTouchListener {
                     }
                     break;
             }
-
             return true;
         }
 

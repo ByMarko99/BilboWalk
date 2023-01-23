@@ -40,11 +40,11 @@ public class PuzzleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
-        String assetName =null;
+        String assetName = null;
         AssetManager am = getAssets();
         try {
-            final String[] files  = am.list("img");
-            assetName=files[0 % files.length];
+            final String[] files = am.list("drawable-v24/");
+            assetName = files[0 % files.length];
 
         } catch (IOException e) {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT);
@@ -237,14 +237,12 @@ public class PuzzleActivity extends AppCompatActivity {
                 canvas.drawPath(path, border);
 
                 // set the resulting bitmap to the piece
-
                 piece.setImageBitmap(puzzlePiece);
                 pieces.add(piece);
                 xCoord += pieceWidth;
             }
             yCoord += pieceHeight;
         }
-
         return pieces;
     }
 
@@ -305,10 +303,6 @@ public class PuzzleActivity extends AppCompatActivity {
                 return false;
             }
         }
-
         return true;
     }
-
-
-
 }
