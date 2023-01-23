@@ -12,7 +12,7 @@ public class PiezaPuzzle extends AppCompatImageView {
     public int pieceHeight;
     public boolean canMove = true;
 
-        public PiezaPuzzle(Context context) {super(context);}
-    }
+    public PiezaPuzzle(Context context) {super(context);}
+}
 
 
