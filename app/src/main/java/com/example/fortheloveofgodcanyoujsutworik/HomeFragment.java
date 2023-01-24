@@ -1,5 +1,6 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
+import static android.content.Context.LOCATION_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 import android.Manifest;
@@ -19,6 +20,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -94,6 +96,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private String mParam2;
     MapView mapView;
     GoogleMap map;
+    LocationManager locationManager;
     VideoView videoView;
     Button btnJ;
     CountDownTimer Timer = null;
@@ -276,12 +279,15 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         }
 
 
-
         // Gets the MapView from the XML layout and creates it
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         videoView = v.findViewById(R.id.videoview);     // VIDEOVIEW OF XML
-        videoView.setVisibility(View.INVISIBLE);
+       // videoView.setVisibility(View.INVISIBLE);
+
+        videoView.setVisibility(View.VISIBLE);
+        video();
+       // alreadyExecuted = true;
 
         mapView.getMapAsync(this);
 
@@ -308,6 +314,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                                     build();
 
                             map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                            marker1 =  map.addMarker(new MarkerOptions().position(here).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
                           //  map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
                             createLocationRequest();
                             locationCallback = new LocationCallback() { // Callback?????????? looper????
@@ -337,7 +344,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                             };
                             startLocationUpdates(); // Crea un looper en el que pide la la localizacion y luego ejecuta lo de arriba para poner el marker
                             // AAAAA reaches here after returning null? gets location enters locationcallback forever???
-
                         }
 
                     }
@@ -446,17 +452,31 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                             mediaPlayer.start();
                             mantenido = true;
                             onMapReady2(map);
+                            onPause();
+                            map.setOnMapClickListener(new GoogleMap.OnMapClickListener()
+                            {
+                                @Override
+                                public void onMapClick(LatLng arg0)
+                                {
+                                    map.clear();
+                                    marker1 =  map.addMarker(new MarkerOptions().position(arg0).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
 
+                                }
+                            });
                         }
 
                     };
                     Timer.start();
 
+
+
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
+                    Timer.cancel();
 
 
                 }
+
                 return false;
             }
         });
@@ -747,9 +767,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     }
 
     private Object getSystemService(String locationService) {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         return locationManager;
     }
+
 
 
     /**
@@ -875,11 +896,15 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     }
 
 
+
     @Override
     public void onPause() {
         super.onPause();
-        mapView.onPause();
+        if (fusedLocationClient != null) {
+            fusedLocationClient.removeLocationUpdates(locationCallback);
+        }
     }
+
 
     @Override
     public void onDestroy() {
