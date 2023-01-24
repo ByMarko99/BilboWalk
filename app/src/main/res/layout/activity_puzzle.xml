@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background = "@drawable/gradient_background"
     tools:context="com.example.fortheloveofgodcanyoujsutworik.PuzzleActivity">
 
     <RelativeLayout
@@ -28,7 +29,20 @@
             android:layout_marginBottom="454dp"
             android:alpha="0.5"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/gernika" />
+            app:srcCompat="@drawable/marijaia_puzzlea" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="410dp"
+            android:layout_height="61dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="659dp"
+            android:text="MARIJAIA PUZZLEA"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
 
     </RelativeLayout>
 

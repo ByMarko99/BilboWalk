@@ -22,12 +22,27 @@
         android:id="@+id/txtPregunta"
         android:layout_width="155dp"
         android:layout_height="28dp"
-        android:layout_marginTop="624dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="casual"
-        android:text="@string/score"
-        android:textSize="20sp"
-        android:visibility="invisible"
+        android:text="Last Score:"
+        android:textSize="16sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtPregunta2"
+        android:layout_width="155dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="casual"
+        android:text="Best Score:"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,19 +50,19 @@
         android:id="@+id/button"
         android:layout_width="115dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="608dp"
         android:background="@drawable/button_rounded_border"
         android:fontFamily="casual"
         android:text="@string/check"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPregunta" />
 
     <ScrollView
-        android:layout_width="358dp"
-        android:layout_height="555dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="337dp"
+        android:layout_height="530dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
