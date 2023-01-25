@@ -502,7 +502,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
 
         });
-        new MyAsyncTaskDistance().execute();
+        if(canGetLocation()){
+            new MyAsyncTaskDistance().execute(); // TODO FIX execute if location is enabled
+
+        }
 
         return v;
     }
