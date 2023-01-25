@@ -221,8 +221,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                         try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
                            // getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
                             ProcessPhoenix.triggerRebirth(getContext()); //TODO fixed crash // Y el fénix resurgió de sus cenizas
-
-
+                            Intent intent2 = new Intent(getActivity(), SplashScreen.class);
+                            ProcessPhoenix.triggerRebirth(getContext(), intent2);
                         } catch (Exception e) {
                             e.printStackTrace();
                            // Intent intent2 = new Intent(getActivity(), SplashScreen.class);
