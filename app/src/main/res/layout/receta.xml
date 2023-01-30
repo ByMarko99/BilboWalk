@@ -12,11 +12,11 @@
         android:id="@+id/textView4"
         android:layout_width="380dp"
         android:layout_height="133dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="casual"
         android:text="Elikagaiak klasifikatu ondoren,  lotu arrautzak, gurin girotua, azukrea eta gatza oragailuan. Nahastu dena ur pixka batekin minutu batzuetan.  Gehitu irina eta ura pixkanaka, eta oratu 35 minutuz masa elastikoa lortu arte. Utzi orea 10 minutuz pausatzen eta, azkenik, gehitu legamia eta pixkanaka-pixkanaka uretatik geratzen dena."
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnComp"
+        app:layout_constraintBottom_toTopOf="@+id/BtnCheckear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent" />
@@ -58,18 +58,16 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+
     <TextView
         android:id="@+id/textView"
-        android:layout_marginTop="48dp"
-        android:layout_width="364dp"
-        android:layout_height="110dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="346dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="64dp"
         android:fontFamily="casual"
         android:text="Gero, 50-60 gramo inguruko bolak osatu, 9 cm inguru luzatu eta gainazal lau batean jarri, 2-3 orduz 40º inguruan pausatzen uzteko. Igurtzi arrautzarekin eta bota azukre pixka bat gainetik. Egosi 200º ingurura labea aurrez berotuta, 8 minutuz. Hoztu ondoren, erditik moztu eta gurinezko kremarekin igurtzi. "
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/Numero2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,14 +75,11 @@
         android:id="@+id/textView2"
         android:layout_width="365dp"
         android:layout_height="46dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="244dp"
         android:fontFamily="casual"
-        android:text="Hasteko, elikagaiak mahai gainean jarriko ditugu eta Gurin-opila egiten hasiko gara."
+        android:text="Hasteko, elikagaiak mahai gainean jarriko ditugu eta Gurin-opila egiten hasiko gara. "
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/Numero3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,16 +92,17 @@
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/Numero2"
         android:layout_width="53dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="12dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -115,35 +111,15 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/txtPregunta3"
-        android:layout_width="126dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:text="Last Score"
-        android:textAlignment="gravity"
-        android:textIsSelectable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtPregunta4"
-        android:layout_width="126dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="4dp"
-        android:text="Best Score"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/btnComp"
+        android:id="@+id/BtnCheckear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:text="Check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
