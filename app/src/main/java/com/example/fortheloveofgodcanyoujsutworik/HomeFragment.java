@@ -109,6 +109,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialogpop;
     boolean mantenido = false;
+    ImageView closebutton;
 
     // The entry point to the Places API.
     //private PlacesClient placesClient;
@@ -130,7 +131,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
     private static View v;
     boolean alreadyExecuted = false;
-
+    private boolean[] buleanobuleanooooooo ={true,true,true,true,false,true,true,true}; // There is an imposter among the booleans EXTREMELY SUSSSSSS
     public static final List<LatLng> sitios = new ArrayList<>();
    private float[][] results = new float[8][1];
     private CharSequence mText;
@@ -277,10 +278,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         videoView = v.findViewById(R.id.videoview);     // VIDEOVIEW OF XML
-       // videoView.setVisibility(View.INVISIBLE);
+        videoView.setVisibility(View.INVISIBLE);
+        closebutton = v.findViewById(R.id.close);     // VIDEOVIEW OF XML
+        closebutton.setVisibility(View.INVISIBLE);
 
-        videoView.setVisibility(View.VISIBLE);
-        video();
+
        // alreadyExecuted = true;
 
         mapView.getMapAsync(this);
@@ -452,9 +454,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                                 @Override
                                 public void onMapClick(LatLng arg0)
                                 {
-                                    map.clear();
-                                    marker1 =  map.addMarker(new MarkerOptions().position(arg0).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
+                                   marker1.remove();
 
+                                    marker1 =  map.addMarker(new MarkerOptions().position(arg0).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
+                                    here = arg0;
                                 }
                             });
                         }
@@ -574,20 +577,130 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         }
 
         if( results[0][0] <  50 ){
+            if(buleanobuleanooooooo[0]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
 
+
+                video();
+                buleanobuleanooooooo[0] = false;
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
         }else if ( results[1][0] <  50 ){
+            if(buleanobuleanooooooo[1]){
+            videoView.setVisibility(View.VISIBLE);
+            closebutton.setVisibility(View.VISIBLE);
+
+
+                video();
+            buleanobuleanooooooo[1] = false;
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[2][0] <  50 ){
+            if(buleanobuleanooooooo[2]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+
+
+                video();
+                buleanobuleanooooooo[2] = false;
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[3][0] <  50 ){
+            if(buleanobuleanooooooo[3]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+
+
+                video();
+                buleanobuleanooooooo[3] = false;
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[4][0] <  50 ){
+            if(!buleanobuleanooooooo[4]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
 
+
+                video();
+                buleanobuleanooooooo[4] = true; // IMPASTA
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
         }else if ( results[5][0] <  50 ){
+            if(buleanobuleanooooooo[5]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+
+
+                video();
+                buleanobuleanooooooo[5] = false;
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[6][0] <  50 ){
+            if(buleanobuleanooooooo[6]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+
+
+                video();
+                buleanobuleanooooooo[6] = false;
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[7][0] <  50 ){
+            if(buleanobuleanooooooo[7]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+
+
+                video();
+                buleanobuleanooooooo[7] = false;
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }/*else if ( results[8][0] <  50 ){
             if(!alreadyExecuted){                                   //TODO radius maximus
