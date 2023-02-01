@@ -50,6 +50,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.IntentCompat;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -128,7 +129,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     TextView bubble;
     Drawable marker;
     Drawable markerdev;
-
+    AppDatabase appDatabase;
     private static View v;
     boolean alreadyExecuted = false;
     private boolean[] buleanobuleanooooooo ={true,true,true,true,false,true,true,true}; // There is an imposter among the booleans EXTREMELY SUSSSSSS
@@ -193,7 +194,37 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
-        // Retrieve the content view that renders the map.
+       List<Booleans> listEncontrados = null;
+
+        appDatabase = Room.databaseBuilder(
+                getContext(),
+                AppDatabase.class,
+                "dbPruebas"
+        ).allowMainThreadQueries().build();
+
+
+
+        try {
+            listEncontrados = appDatabase.daoBooleans().obtenerBooleans();
+
+        }
+        catch (Exception e){
+
+        }
+
+        if (listEncontrados == null || listEncontrados.isEmpty()){
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(0, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(1, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(2, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(3, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(4, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(5, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(6, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(7, false));
+        }
+
+        listEncontrados = appDatabase.daoBooleans().obtenerBooleans();
+
 
 
     }
@@ -448,7 +479,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                             mediaPlayer.start();
                             mantenido = true;
                             onMapReady2(map);
-                            onPause();
+                            onPause2();
                             map.setOnMapClickListener(new GoogleMap.OnMapClickListener()
                             {
                                 @Override
@@ -573,17 +604,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                     sitios.get(i).latitude, sitios.get(i).longitude, results[i]);
 
 
-
         }
 
         if( results[0][0] <  50 ){
             if(buleanobuleanooooooo[0]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 0);
 
+                buleanobuleanooooooo[0] = false;
 
                 video();
-                buleanobuleanooooooo[0] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -595,10 +626,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[1]){
             videoView.setVisibility(View.VISIBLE);
             closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 1);
 
+                buleanobuleanooooooo[1] = false;
 
                 video();
-            buleanobuleanooooooo[1] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -611,10 +643,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[2]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 2);
+
+                buleanobuleanooooooo[2] = false;
 
 
                 video();
-                buleanobuleanooooooo[2] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -627,10 +661,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[3]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 3);
 
+                buleanobuleanooooooo[3] = false;
 
                 video();
-                buleanobuleanooooooo[3] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -643,10 +678,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(!buleanobuleanooooooo[4]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 4);
 
+                buleanobuleanooooooo[4] = true; // IMPASTA
 
                 video();
-                buleanobuleanooooooo[4] = true; // IMPASTA
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -658,10 +694,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[5]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 5);
+
+                buleanobuleanooooooo[5] = false;
 
 
                 video();
-                buleanobuleanooooooo[5] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -674,10 +712,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[6]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 6);
 
+                buleanobuleanooooooo[6] = false;
 
                 video();
-                buleanobuleanooooooo[6] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -690,10 +729,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[7]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 7);
+
+                buleanobuleanooooooo[7] = false;
 
 
                 video();
-                buleanobuleanooooooo[7] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -1009,6 +1050,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
     @Override
     public void onPause() {
+        super.onPause();
+        mapView.onPause();
+
+    }
+
+    public void onPause2() {
         super.onPause();
         if (fusedLocationClient != null) {
             fusedLocationClient.removeLocationUpdates(locationCallback);
