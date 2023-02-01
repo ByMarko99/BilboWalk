@@ -42,7 +42,7 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/galdetegiacandado" />
+                    tools:srcCompat="@drawable/GaldetegiaCandado" />
             </LinearLayout>
             <!-- JUEGOS -->
             <LinearLayout
@@ -58,7 +58,7 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/nordamarijaiacandado" />
+                    tools:srcCompat="@drawable/NorDaMarijaiaCandado" />
 
                 <ImageView
                     android:id="@+id/imageView4"
