@@ -369,7 +369,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                     if (result == 1) {
                         if(mediaPlayer != null){ // Evitar solapación de audios if varios clicks
                             mediaPlayer.stop();
-
                         }
                         bubble.setVisibility(v.VISIBLE);
                         animateText("    My name is Walter Wartwell White. I live at 308 negra arroyo.");
@@ -381,25 +380,21 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                     }else if(result == 2){
                         if(mediaPlayer != null){
                             mediaPlayer.stop();
-
-                        }                        bubble.setVisibility(v.VISIBLE);
+                        }
+                        bubble.setVisibility(v.VISIBLE);
                         animateText("    Amongus sussy remix");
                         setCharacterDelay(50);
                         mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
                         mediaPlayer.start();
-
-
                     }else{
                         if(mediaPlayer != null){
                             mediaPlayer.stop();
-
                         }
                         bubble.setVisibility(v.VISIBLE);
                         animateText("    Hola niños os voy a enseñar a hacer metanfetamina");
                         setCharacterDelay(50);
                         mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
                         mediaPlayer.start();
-
                     }
                     }
                 } catch (Exception e) {
@@ -409,8 +404,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
             }
         });
-
-
 
         walter.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -440,8 +433,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                                 public void run() {
                                     animateText2("going dark");
                                     setCharacterDelay(50);
-
-                                                                   }
+                                }
                             }, 2000);
 
                             mediaPlayer = MediaPlayer.create(getContext(), R.raw.bravosix);
@@ -461,19 +453,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                                 }
                             });
                         }
-
                     };
                     Timer.start();
-
-
-
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-
                     Timer.cancel();
-
-
                 }
-
                 return false;
             }
         });
@@ -491,21 +475,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         btnJ = v.findViewById(R.id.btnJ);
         btnJ.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
-
-                    //    fragmentTransaction.remove(HomeFragment.this).commit();
-                    try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
-                        Intent intent = new Intent(getActivity(), Receta.class);
+                    try {
+                        Intent intent = new Intent(getActivity(), SeleccionJuegos.class);
                         startActivity(intent);
-
                     } catch (Throwable e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
-
         });
         if(canGetLocation()){
             new MyAsyncTaskDistance().execute(); // TODO FIX execute if location is enabled
@@ -544,44 +520,32 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     public void animateText(CharSequence text) {
         mText = text;
         mIndex = 0;
-
         bubble.setText("");
         mHandler.removeCallbacks(characterAdder);
         mHandler.postDelayed(characterAdder, mDelay);
-
     }
 
     public void animateText2(CharSequence text) {
         mText = text;
         mIndex = 0;
-
-
         mHandler.removeCallbacks(characterAdder2);
         mHandler.postDelayed(characterAdder2, mDelay);
-
     }
 
     public void setCharacterDelay(long millis) {
         mDelay = millis;
     }
 
-
-
     public void getDistanceBetween(){
         for (int i = 0; i < sitios.size(); i++) {
             Location.distanceBetween(here.latitude, here.longitude,
                     sitios.get(i).latitude, sitios.get(i).longitude, results[i]);
-
-
-
         }
 
         if( results[0][0] <  50 ){
             if(buleanobuleanooooooo[0]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
                 buleanobuleanooooooo[0] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
@@ -595,8 +559,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[1]){
             videoView.setVisibility(View.VISIBLE);
             closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
             buleanobuleanooooooo[1] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
@@ -611,8 +573,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[2]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
                 buleanobuleanooooooo[2] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
@@ -627,8 +587,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[3]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
                 buleanobuleanooooooo[3] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
@@ -643,8 +601,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(!buleanobuleanooooooo[4]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
                 buleanobuleanooooooo[4] = true; // IMPASTA
                 closebutton.setOnClickListener(new View.OnClickListener() {
@@ -658,8 +614,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[5]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
                 buleanobuleanooooooo[5] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
@@ -674,8 +628,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[6]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
                 buleanobuleanooooooo[6] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
@@ -690,8 +642,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             if(buleanobuleanooooooo[7]){
                 videoView.setVisibility(View.VISIBLE);
                 closebutton.setVisibility(View.VISIBLE);
-
-
                 video();
                 buleanobuleanooooooo[7] = false;
                 closebutton.setOnClickListener(new View.OnClickListener() {
