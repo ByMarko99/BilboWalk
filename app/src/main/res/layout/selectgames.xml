@@ -39,7 +39,7 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:scaleType="fitXY"
                     tools:ignore="SpeakableTextPresentCheck"
-                    tools:srcCompat="@drawable/AzkunaTxartelakCandado" />
+                    tools:srcCompat="@drawable/azkunatxartelakcandado" />
 
                 <ImageButton
                     android:id="@+id/imageButtonJ2"
@@ -49,7 +49,7 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:scaleType="fitXY"
                     tools:ignore="SpeakableTextPresentCheck"
-                    tools:srcCompat="@drawable/GaldetegiaCandado" />
+                    tools:srcCompat="@drawable/galdetegiacandado" />
             </LinearLayout>
             <!-- JUEGOS -->
             <LinearLayout
@@ -72,7 +72,7 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:scaleType="fitXY"
                     tools:ignore="SpeakableTextPresentCheck"
-                    tools:srcCompat="@drawable/NorDaMarijaiaCandado" />
+                    tools:srcCompat="@drawable/nordamarijaiacandado" />
 
                 <ImageButton
                     android:id="@+id/imageButtonJ4"
