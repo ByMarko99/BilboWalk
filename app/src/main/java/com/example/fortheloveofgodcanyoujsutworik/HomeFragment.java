@@ -519,25 +519,24 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 }
             }
         });
+
         btnJ = v.findViewById(R.id.btnJ);
         btnJ.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
-
-                //    fragmentTransaction.remove(HomeFragment.this).commit();
-                try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
-                    Intent intent = new Intent(getActivity(), SeleccionJuegos.class);
-                    startActivity(intent);
-
-                } catch (Throwable e) {
-                    e.printStackTrace();
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent2 = new Intent(getActivity(), SeleccionJuegos.class);
+                    startActivity(intent2);
                 }
+               catch (Exception e){
+                   Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 
-
+               }
             }
-
-
         });
+
+
+
         if(canGetLocation()){
             new MyAsyncTaskDistance().execute(); // TODO FIX execute if location is enabled
 

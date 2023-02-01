@@ -21,7 +21,6 @@ public class SeleccionJuegos extends AppCompatActivity {
         ImageButton j4 = (ImageButton) findViewById(R.id.imageButtonJ4);
         ImageButton j5 = (ImageButton) findViewById(R.id.imageButtonJ5);
         ImageButton j6 = (ImageButton) findViewById(R.id.imageButtonJ6);
-
         //Leer la base de datos y cambiar la imagen de los imageButton dependiendo de si el juego esta desbloqueado o no
 
 
@@ -71,11 +70,4 @@ public class SeleccionJuegos extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
-
 }

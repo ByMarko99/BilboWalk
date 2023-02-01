@@ -45,6 +45,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Santotomas"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".SeleccionJuegos"
+            android:screenOrientation="portrait"></activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAoWLJTWNv6-ordgjSWCwNIGCwsX7VbPzo"
