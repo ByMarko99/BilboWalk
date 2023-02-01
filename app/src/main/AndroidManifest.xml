@@ -36,7 +36,8 @@
         <activity android:name=".Preguntas"></activity>
         <activity android:name=".PreguntasTest"></activity>
         <activity android:name=".PuzzleActivity"></activity>
-
+        <activity android:name=".Receta"></activity>
+        <activity android:name=".Santotomas"></activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAoWLJTWNv6-ordgjSWCwNIGCwsX7VbPzo"

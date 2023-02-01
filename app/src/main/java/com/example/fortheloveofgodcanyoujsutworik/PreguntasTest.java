@@ -188,6 +188,7 @@ public class PreguntasTest extends AppCompatActivity {
                         txtPregunta.setText("Score: "+a);
 
                     }
+
                     int uwu = 0, aña;
                     for(int i = 0 ; i <appDatabase.daoScore().obtenerScore().size(); i++){
                         uwu =appDatabase.daoScore().obtenerScore().get(i).id;
@@ -212,15 +213,19 @@ public class PreguntasTest extends AppCompatActivity {
                             }
                         }
                         if(xd>m){
-                            txtPregunta.setText("Best Score="+xd);
+                            txtPregunta2.setText("Best Score="+xd);
                         }
-                        txtPregunta2.setText("Last Score="+xd);
+                        txtPregunta.setText("Last Score="+xd);
 
                     }
                     button.setText("ERANTSUNAK");
                     vuelta ++;
                 }
+                        // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
 
+                        //    fragmentTransaction.remove(HomeFragment.this).commit();
+                Intent intent = new Intent(PreguntasTest.this, Receta.class);
+                startActivity(intent);
 
             }
         });
