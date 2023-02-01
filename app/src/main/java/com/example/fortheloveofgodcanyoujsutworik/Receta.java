@@ -45,9 +45,6 @@ TextView txtPregunta2;
         final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
         Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
-        txtPregunta = findViewById(R.id.txtPregunta);
-        txtPregunta2 = findViewById(R.id.txtPregunta2);
-
         /*List<Score> listScore;
 
         AppDatabase appDatabase = Room.databaseBuilder(
