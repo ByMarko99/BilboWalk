@@ -13,5 +13,4 @@ public interface DaoCompletado {
 
     @Insert
     void completar(Completado...completados);
-
 }
