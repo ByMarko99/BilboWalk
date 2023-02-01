@@ -63,7 +63,7 @@
                 android:scaleType="fitXY"
                 android:gravity="center"
                 android:orientation="horizontal">
-
+//hihijajaj
                 <ImageButton
                     android:id="@+id/imageButtonJ3"
                     android:layout_width="match_parent"
