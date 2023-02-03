@@ -3,16 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fortheloveofgodcanyoujsutworik">
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -21,9 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FORTHELOVEOFGODCANYOUJSUTWORIK"
         tools:targetApi="31">
+
         <activity
             android:name=".SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,13 +31,22 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SelectImage"></activity>
-        <activity android:name=".Preguntas"></activity>
-        <activity android:name=".PreguntasTest"></activity>
-        <activity android:name=".PuzzleActivity"></activity>
-        <activity android:name=".Receta"></activity>
-        <activity android:name=".Santotomas"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".SelectImage"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Preguntas"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".PreguntasTest"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".PuzzleActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Receta"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Santotomas"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".SeleccionJuegos"
+            android:screenOrientation="portrait"></activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAoWLJTWNv6-ordgjSWCwNIGCwsX7VbPzo"

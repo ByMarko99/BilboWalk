@@ -50,6 +50,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.IntentCompat;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -109,6 +110,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialogpop;
     boolean mantenido = false;
+    ImageView closebutton;
 
     // The entry point to the Places API.
     //private PlacesClient placesClient;
@@ -127,12 +129,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     TextView bubble;
     Drawable marker;
     Drawable markerdev;
-
+    AppDatabase appDatabase;
     private static View v;
     boolean alreadyExecuted = false;
-
+    private boolean[] buleanobuleanooooooo ={true,true,true,true,false,true,true,true}; // There is an imposter among the booleans EXTREMELY SUSSSSSS
     public static final List<LatLng> sitios = new ArrayList<>();
-   private float[][] results = new float[8][1];
+    private float[][] results = new float[8][1];
     private CharSequence mText;
     private int mIndex;
     private long mDelay = 500;
@@ -192,7 +194,37 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
-        // Retrieve the content view that renders the map.
+        List<Booleans> listEncontrados = null;
+
+        appDatabase = Room.databaseBuilder(
+                getContext(),
+                AppDatabase.class,
+                "dbPruebas"
+        ).allowMainThreadQueries().build();
+
+
+
+        try {
+            listEncontrados = appDatabase.daoBooleans().obtenerBooleans();
+
+        }
+        catch (Exception e){
+
+        }
+
+        if (listEncontrados == null || listEncontrados.isEmpty()){
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(0, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(1, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(2, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(3, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(4, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(5, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(6, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(7, false));
+        }
+
+        listEncontrados = appDatabase.daoBooleans().obtenerBooleans();
+
 
 
     }
@@ -219,16 +251,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
                         //    fragmentTransaction.remove(HomeFragment.this).commit();
                         try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
-                           // getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
-                         //TODO fixed crash // Y el fénix resurgió de sus cenizas
+                            // getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
+                            //TODO fixed crash // Y el fénix resurgió de sus cenizas
                             ProcessPhoenix.triggerRebirth(getContext()); //TODO fix de nuevo no funciona
 
                             //Intent intent2 = new Intent(getActivity(), SplashScreen.class);
                             //ProcessPhoenix.triggerRebirth(getContext(), intent2);
                         } catch (Exception e) {
                             e.printStackTrace();
-                           // Intent intent2 = new Intent(getActivity(), SplashScreen.class);
-                           // startActivity(intent2);
+                            // Intent intent2 = new Intent(getActivity(), SplashScreen.class);
+                            // startActivity(intent2);
                         }
 
 
@@ -277,11 +309,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         videoView = v.findViewById(R.id.videoview);     // VIDEOVIEW OF XML
-       // videoView.setVisibility(View.INVISIBLE);
+        videoView.setVisibility(View.INVISIBLE);
+        closebutton = v.findViewById(R.id.close);     // VIDEOVIEW OF XML
+        closebutton.setVisibility(View.INVISIBLE);
 
-        videoView.setVisibility(View.VISIBLE);
-        video();
-       // alreadyExecuted = true;
+
+        // alreadyExecuted = true;
 
         mapView.getMapAsync(this);
 
@@ -294,7 +327,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
                         if (location == null) {
 
-                                    new MyAsyncTask().execute(); // I forgor que hace💀💀
+                            new MyAsyncTask().execute(); // I forgor que hace💀💀
                             // asks for gps eprmission
 
                         }else {
@@ -309,7 +342,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
                             map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                             marker1 =  map.addMarker(new MarkerOptions().position(here).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
-                          //  map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
+                            //  map.moveCamera(CameraUpdateFactory.newLatLngZoom(here, zoomLevel));
                             createLocationRequest();
                             locationCallback = new LocationCallback() { // Callback?????????? looper????
                                 @Override
@@ -364,41 +397,41 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                     if (!mantenido){
 
 
-                    if (result == 1) {
-                        if(mediaPlayer != null){ // Evitar solapación de audios if varios clicks
-                            mediaPlayer.stop();
+                        if (result == 1) {
+                            if(mediaPlayer != null){ // Evitar solapación de audios if varios clicks
+                                mediaPlayer.stop();
+
+                            }
+                            bubble.setVisibility(v.VISIBLE);
+                            animateText("    My name is Walter Wartwell White. I live at 308 negra arroyo.");
+                            setCharacterDelay(50);
+                            mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa);
+                            mediaPlayer.start();
+
+
+                        }else if(result == 2){
+                            if(mediaPlayer != null){
+                                mediaPlayer.stop();
+
+                            }                        bubble.setVisibility(v.VISIBLE);
+                            animateText("    Amongus sussy remix");
+                            setCharacterDelay(50);
+                            mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
+                            mediaPlayer.start();
+
+
+                        }else{
+                            if(mediaPlayer != null){
+                                mediaPlayer.stop();
+
+                            }
+                            bubble.setVisibility(v.VISIBLE);
+                            animateText("    Hola niños os voy a enseñar a hacer metanfetamina");
+                            setCharacterDelay(50);
+                            mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
+                            mediaPlayer.start();
 
                         }
-                        bubble.setVisibility(v.VISIBLE);
-                        animateText("    My name is Walter Wartwell White. I live at 308 negra arroyo.");
-                        setCharacterDelay(50);
-                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa);
-                        mediaPlayer.start();
-
-
-                    }else if(result == 2){
-                        if(mediaPlayer != null){
-                            mediaPlayer.stop();
-
-                        }                        bubble.setVisibility(v.VISIBLE);
-                        animateText("    Amongus sussy remix");
-                        setCharacterDelay(50);
-                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
-                        mediaPlayer.start();
-
-
-                    }else{
-                        if(mediaPlayer != null){
-                            mediaPlayer.stop();
-
-                        }
-                        bubble.setVisibility(v.VISIBLE);
-                        animateText("    Hola niños os voy a enseñar a hacer metanfetamina");
-                        setCharacterDelay(50);
-                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
-                        mediaPlayer.start();
-
-                    }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -439,22 +472,23 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                                     animateText2("going dark");
                                     setCharacterDelay(50);
 
-                                                                   }
+                                }
                             }, 2000);
 
                             mediaPlayer = MediaPlayer.create(getContext(), R.raw.bravosix);
                             mediaPlayer.start();
                             mantenido = true;
                             onMapReady2(map);
-                            onPause();
+                            onPause2();
                             map.setOnMapClickListener(new GoogleMap.OnMapClickListener()
                             {
                                 @Override
                                 public void onMapClick(LatLng arg0)
                                 {
-                                    map.clear();
-                                    marker1 =  map.addMarker(new MarkerOptions().position(arg0).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
+                                    marker1.remove();
 
+                                    marker1 =  map.addMarker(new MarkerOptions().position(arg0).title("Hemen zaude").icon(BitmapDescriptorFactory.fromResource(R.raw.person)));
+                                    here = arg0;
                                 }
                             });
                         }
@@ -485,25 +519,24 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 }
             }
         });
+
         btnJ = v.findViewById(R.id.btnJ);
         btnJ.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
-
-                    //    fragmentTransaction.remove(HomeFragment.this).commit();
-                    try { // Fuerza destrozar el fragmento, salta error, el usuario no lo nota
-                        Intent intent = new Intent(getActivity(), Receta.class);
-                        startActivity(intent);
-
-                    } catch (Throwable e) {
-                        e.printStackTrace();
-                    }
-
-
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent2 = new Intent(getActivity(), SeleccionJuegos.class);
+                    startActivity(intent2);
                 }
+               catch (Exception e){
+                   Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 
-
+               }
+            }
         });
+
+
+
         if(canGetLocation()){
             new MyAsyncTaskDistance().execute(); // TODO FIX execute if location is enabled
 
@@ -512,32 +545,32 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         return v;
     }
 
-  /*  @SuppressLint("MissingPermission")
-    public void getLocation(){
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+    /*  @SuppressLint("MissingPermission")
+      public void getLocation(){
+          fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
+          fusedLocationClient.getLastLocation()
+                  .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                      @Override
+                      public void onSuccess(Location location) {
 
-                        if (location != null) {
-
-
-                            try {
-                                LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
-                                map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
-                            }catch (Exception e){
-
-                            }
+                          if (location != null) {
 
 
-                        }
+                              try {
+                                  LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
+                                  map.addMarker(new MarkerOptions().position(here).title("Hemen zaude"));
+                              }catch (Exception e){
+
+                              }
 
 
-                    }
-                });
-    }*/
+                          }
+
+
+                      }
+                  });
+      }*/
     public void animateText(CharSequence text) {
         mText = text;
         mIndex = 0;
@@ -570,24 +603,144 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                     sitios.get(i).latitude, sitios.get(i).longitude, results[i]);
 
 
-
         }
 
         if( results[0][0] <  50 ){
+            if(buleanobuleanooooooo[0]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 0);
 
+                buleanobuleanooooooo[0] = false;
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
         }else if ( results[1][0] <  50 ){
+            if(buleanobuleanooooooo[1]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 1);
+
+                buleanobuleanooooooo[1] = false;
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[2][0] <  50 ){
+            if(buleanobuleanooooooo[2]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 2);
+
+                buleanobuleanooooooo[2] = false;
+
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[3][0] <  50 ){
+            if(buleanobuleanooooooo[3]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 3);
+
+                buleanobuleanooooooo[3] = false;
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[4][0] <  50 ){
+            if(!buleanobuleanooooooo[4]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 4);
 
+                buleanobuleanooooooo[4] = true; // IMPASTA
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
         }else if ( results[5][0] <  50 ){
+            if(buleanobuleanooooooo[5]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 5);
+
+                buleanobuleanooooooo[5] = false;
+
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[6][0] <  50 ){
+            if(buleanobuleanooooooo[6]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 6);
+
+                buleanobuleanooooooo[6] = false;
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }else if ( results[7][0] <  50 ){
+            if(buleanobuleanooooooo[7]){
+                videoView.setVisibility(View.VISIBLE);
+                closebutton.setVisibility(View.VISIBLE);
+                appDatabase.daoBooleans().actualizarBoolean(true, 7);
+
+                buleanobuleanooooooo[7] = false;
+
+
+                video();
+                closebutton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        videoView.setVisibility(View.INVISIBLE);
+                        closebutton.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
 
         }/*else if ( results[8][0] <  50 ){
             if(!alreadyExecuted){                                   //TODO radius maximus
@@ -816,7 +969,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         videoView.setMediaController(mediaController);
         // VIDEO CONTROLLER
         mediaController.show(0);
-            mediaController.setAnchorView(videoView);
+        mediaController.setAnchorView(videoView);
 
     }
 
@@ -840,7 +993,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
 
 
-        public void onCameraIdle() {
+    public void onCameraIdle() {
         CameraPosition cameraPosition = map.getCameraPosition();
         if (mPulseEffectAnimator != null)
             mPulseEffectAnimator.setFloatValues(0, calculatePulseRadius(cameraPosition.zoom));
@@ -896,6 +1049,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
     @Override
     public void onPause() {
+        super.onPause();
+        mapView.onPause();
+
+    }
+
+    public void onPause2() {
         super.onPause();
         if (fusedLocationClient != null) {
             fusedLocationClient.removeLocationUpdates(locationCallback);
