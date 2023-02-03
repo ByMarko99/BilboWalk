@@ -13,4 +13,11 @@ public interface DaoScore {
     @Insert
     void InsertarScore(Score...scores);
 
+    @Query("UPDATE score SET scorenum =:scorenum WHERE id =:id")
+    void updateScore(int id,int scorenum);
+
+    @Query("DELETE FROM score")
+    void borrarScore();
+
+
 }

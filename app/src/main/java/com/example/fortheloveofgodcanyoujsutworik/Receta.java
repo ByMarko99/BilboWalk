@@ -20,12 +20,12 @@ EditText Numero1;
 EditText Numero2;
 EditText Numero3;
 EditText Numero4;
-TextView textView;
-TextView textView2;
-TextView textView3;
-TextView textView4;
-TextView txtPregunta;
-TextView txtPregunta2;
+TextView texto1;
+TextView texto2;
+TextView texto3;
+TextView texto4;
+TextView textView9;
+TextView textView10;
     int i = 0;
     int vuelta = 0;
 
@@ -37,51 +37,87 @@ TextView txtPregunta2;
         Numero2 = findViewById(R.id.Numero2);
         Numero3 = findViewById(R.id.Numero3);
         Numero4 = findViewById(R.id.Numero4);
-        textView = findViewById(R.id.textView);
-        textView2 = findViewById(R.id.textView2);
-        textView3 = findViewById(R.id.textView3);
-        textView4 = findViewById(R.id.textView4);
+        texto1 = findViewById(R.id.texto1);
+        texto2 = findViewById(R.id.texto2);
+        texto3 = findViewById(R.id.texto3);
+        texto4 = findViewById(R.id.texto4);
 
         final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
         Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
-        txtPregunta = findViewById(R.id.txtPregunta);
-        txtPregunta2 = findViewById(R.id.txtPregunta2);
+        textView9 = findViewById(R.id.textView9);
+        textView10 = findViewById(R.id.textView10);
+        BtnCheckear = (Button) findViewById(R.id.BtnCheckear);
 
-        /*List<Score> listScore;
+        List<ScoreR> listScoreR;
 
         AppDatabase appDatabase = Room.databaseBuilder(
                 getApplicationContext(),
                 AppDatabase.class,
                 "dbPruebas"
-        ).allowMainThreadQueries().build();
+        ).allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
-        listScore = appDatabase.daoScore().obtenerScore();
-        if(listScore.isEmpty()){
-            txtPregunta.setText("Last Score=0");
-            txtPregunta2.setText("Best Score=0");
+        listScoreR = appDatabase.daoScoreR().obtenerScoreR();
+        if(listScoreR.isEmpty()){
+            textView9.setText("Last Score=0");
+            textView10.setText("Best Score=0");
         } else {
-            listScore = appDatabase.daoScore().obtenerScore();
-            int xd = 0;
-            int penis = 0;
-            int m =0;
-            for(int i = 0 ; i <listScore.size(); i++){
-                xd = listScore.get(i).scorenum;
+            listScoreR = appDatabase.daoScoreR().obtenerScoreR();
+            int scr = 0;
+            int mayor = 0;
+            int mayorf =0;
+            for(int i = 0 ; i <listScoreR.size(); i++){
+                scr = listScoreR.get(i).scorenumR;
                 int v = i-1;
                 if(i>0){
 
-                    penis = listScore.get(v).scorenum;
-                    if(penis>m){
-                        m=penis;
+                    mayor = listScoreR.get(v).scorenumR;
+                    if(mayor>mayorf){
+                        mayorf=mayor;
                     }
                 }
-                if(xd>m){
-                    txtPregunta2.setText("Best Score="+xd);
+                if(scr>mayorf){
+                    textView10.setText("Best Score="+scr);
                 }
-                txtPregunta.setText("Last Score="+xd);
+                textView9.setText("Last Score="+scr);
+                if(listScoreR.get(i).completado==1){
+
+                    texto1.setVisibility(View.INVISIBLE);
+                    texto3.setVisibility(View.INVISIBLE);
+                    texto4.setVisibility(View.INVISIBLE);
+                    textView9.setVisibility(View.INVISIBLE);
+                    textView10.setVisibility(View.INVISIBLE);
+                    Numero1.setVisibility(View.INVISIBLE);
+                    Numero2.setVisibility(View.INVISIBLE);
+                    Numero3.setVisibility(View.INVISIBLE);
+                    Numero4.setVisibility(View.INVISIBLE);
+                    BtnCheckear.setVisibility(View.VISIBLE);
+                    BtnCheckear.setText("???");
+                    texto2.setText("JOKO HAU EGIN DUZU BERRIRO?");
+                    texto2.setTextSize(24);
+                    texto2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+                }else{
+                    texto1.setVisibility(View.VISIBLE);
+                    texto3.setVisibility(View.VISIBLE);
+                    texto4.setVisibility(View.VISIBLE);
+                    Numero1.setVisibility(View.VISIBLE);
+                    Numero2.setVisibility(View.VISIBLE);
+                    Numero3.setVisibility(View.VISIBLE);
+                    Numero4.setVisibility(View.VISIBLE);
+                    BtnCheckear.setVisibility(View.VISIBLE);
+                    textView9.setVisibility(View.VISIBLE);
+                    textView10.setVisibility(View.VISIBLE);
+                    texto2.setText("Hasteko, elikagaiak mahai gainean jarriko ditugu eta Gurin-opila egiten hasiko gara.");
+                    texto2.setTextSize(14);
+                    texto2.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
+                    BtnCheckear.setText("CHECK");
+                }
             }
-        }*/
-        BtnCheckear = (Button) findViewById(R.id.BtnCheckear);
+        }
+
+
+
         BtnCheckear.setOnClickListener(new View.OnClickListener() {
         public void onClick(View view){
             i = 0;
@@ -99,6 +135,24 @@ TextView txtPregunta2;
 
             }
             else if(vuelta==0) {
+                if(BtnCheckear.getText().equals("???")){
+                    texto1.setVisibility(View.VISIBLE);
+                    texto3.setVisibility(View.VISIBLE);
+                    texto4.setVisibility(View.VISIBLE);
+                    Numero1.setVisibility(View.VISIBLE);
+                    Numero2.setVisibility(View.VISIBLE);
+                    Numero3.setVisibility(View.VISIBLE);
+                    Numero4.setVisibility(View.VISIBLE);
+                    BtnCheckear.setVisibility(View.VISIBLE);
+                    textView9.setVisibility(View.VISIBLE);
+                    textView10.setVisibility(View.VISIBLE);
+                    texto2.setText("Hasteko, elikagaiak mahai gainean jarriko ditugu eta Gurin-opila egiten hasiko gara.");
+                    texto2.setTextSize(14);
+                    texto2.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
+                    BtnCheckear.setText("CHECK");
+
+
+                }else{
                 BtnCheckear.setText("CHECK");
                 if(Numero1.getText().toString().equals("3")){
                     i++;
@@ -131,51 +185,59 @@ TextView txtPregunta2;
                 }
 
                 if(i == 4 ){
-                    textView.setVisibility(View.INVISIBLE);
-                    textView3.setVisibility(View.INVISIBLE);
-                    textView4.setVisibility(View.INVISIBLE);
+                    texto1.setVisibility(View.INVISIBLE);
+                    texto3.setVisibility(View.INVISIBLE);
+                    texto4.setVisibility(View.INVISIBLE);
                     Numero1.setVisibility(View.INVISIBLE);
                     Numero2.setVisibility(View.INVISIBLE);
                     Numero3.setVisibility(View.INVISIBLE);
                     Numero4.setVisibility(View.INVISIBLE);
                     BtnCheckear.setVisibility(View.INVISIBLE);
 
-                    textView2.startAnimation(animationScale);
-                    textView2.setText("🍆💧 OSO ONDO ༼ つ ◕_◕ ༽つ");
-                    textView2.setTextSize(24);
-                    textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    texto2.startAnimation(animationScale);
+                    texto2.setText("🍆💧 OSO ONDO ༼ つ ◕_◕ ༽つ");
+                    texto2.setTextSize(24);
+                    texto2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                 }
 
-                /*int uwu = 0, aña;
-                for(int i = 0 ; i <appDatabase.daoScore().obtenerScore().size(); i++){
-                    uwu =appDatabase.daoScore().obtenerScore().get(i).id;
-
+                int uwu = 0, aña;
+                for(int i = 0 ; i <appDatabase.daoScoreR().obtenerScoreR().size(); i++){
+                    uwu =appDatabase.daoScoreR().obtenerScoreR().get(i).idR;
                 }
+                ScoreR book1 = null;
                 aña = uwu +1;
+                if(i<4){
+                    book1 = new ScoreR(aña,i,0);
+                }
+                if(i==4){
+                    book1 = new ScoreR(aña,i,1);
+                }
 
-                Score book1 = new Score(aña,i);
-                appDatabase.daoScore().InsertarScore(book1);
-                int xd = 0;
-                int penis = 0;
-                int m =0;
-                for(int i = 0 ; i <appDatabase.daoScore().obtenerScore().size(); i++){
-                    xd =appDatabase.daoScore().obtenerScore().get(i).scorenum;
+                appDatabase.daoScoreR().InsertarScoreR(book1);
+
+                int scr = 0;
+                int mayor = 0;
+                int mayorf =0;
+
+                for(int i = 0 ; i <appDatabase.daoScoreR().obtenerScoreR().size(); i++){
+                    scr =appDatabase.daoScoreR().obtenerScoreR().get(i).scorenumR;
                     int v = i-1;
 
                     if(i>0){
 
-                        penis = appDatabase.daoScore().obtenerScore().get(v).scorenum;
-                        if(penis>m){
-                            m=penis;
+                        mayor = appDatabase.daoScoreR().obtenerScoreR().get(v).scorenumR;
+                        if(mayor>mayorf){
+                            mayorf=mayor;
                         }
                     }
-                    if(xd>m){
-                        txtPregunta.setText("Best Score="+xd);
+                    if(scr>mayorf){
+                        textView10.setText("Best Score="+scr);
                     }
-                    txtPregunta2.setText("Last Score="+xd);
+                    textView9.setText("Last Score="+scr);
 
-                }*/
+                }
+                }
             }
 
 

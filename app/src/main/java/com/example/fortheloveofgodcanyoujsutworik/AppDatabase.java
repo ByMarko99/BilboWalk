@@ -4,10 +4,10 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 @Database(
-        entities = {Score.class,Completado.class},
-        version = 1
+        entities = {Score.class,ScoreR.class},
+        version = 2
 )
 public abstract class AppDatabase extends RoomDatabase {
     public abstract DaoScore daoScore();
-    public abstract DaoCompletado daoCompletado();
+    public abstract DaoScoreR daoScoreR();
 }

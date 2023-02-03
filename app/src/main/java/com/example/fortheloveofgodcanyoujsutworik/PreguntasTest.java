@@ -1,6 +1,5 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,7 +22,7 @@ public class PreguntasTest extends AppCompatActivity {
     TextView textView5;
     TextView textView6;
     TextView textView7;
-    Button button;
+    Button button,button2;
     CheckBox SanMames;
     CheckBox AzkunaZentroa;
     RadioButton GurinOpila;
@@ -47,7 +46,7 @@ public class PreguntasTest extends AppCompatActivity {
                 getApplicationContext(),
                 AppDatabase.class,
                 "dbPruebas"
-        ).allowMainThreadQueries().build();
+        ).allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
         listScore = appDatabase.daoScore().obtenerScore();
 
@@ -56,23 +55,23 @@ public class PreguntasTest extends AppCompatActivity {
             txtPregunta2.setText("Best Score=0");
         } else {
             listScore = appDatabase.daoScore().obtenerScore();
-            int xd = 0;
-            int penis = 0;
-            int m =0;
+            int scoren = 0;
+            int mayor = 0;
+            int mayorconfirmado =0;
             for(int i = 0 ; i <listScore.size(); i++){
-                xd = listScore.get(i).scorenum;
+                scoren = listScore.get(i).scorenum;
                 int v = i-1;
                 if(i>0){
 
-                    penis = listScore.get(v).scorenum;
-                    if(penis>m){
-                        m=penis;
+                    mayor = listScore.get(v).scorenum;
+                    if(mayor>mayorconfirmado){
+                        mayorconfirmado=mayor;
                     }
                 }
-                if(xd>m){
-                    txtPregunta2.setText("Best Score="+xd);
+                if(scoren>mayorconfirmado){
+                    txtPregunta2.setText("Best Score="+scoren);
                 }
-                txtPregunta.setText("Last Score="+xd);
+                txtPregunta.setText("Last Score="+scoren);
             }
         }
         button = findViewById(R.id.button);
@@ -82,12 +81,12 @@ public class PreguntasTest extends AppCompatActivity {
             public void onClick(View view) {
                 SanMames=findViewById(R.id.SanMames);
                 AzkunaZentroa=findViewById(R.id.AzkunaZentroa);
-                txtView=findViewById(R.id.textView);
+                txtView=findViewById(R.id.texto1);
                 textView5=findViewById(R.id.textView5);
                 textView6=findViewById(R.id.textView6);
                 textView7=findViewById(R.id.textView7);
                 GurinOpila=findViewById(R.id.GurinOpila);
-                textView3=findViewById(R.id.textView3);
+                textView3=findViewById(R.id.texto3);
                 Marijaia=findViewById(R.id.Marijaia);
                 Begoña=findViewById(R.id.Begoña);
                 SantoTomas=findViewById(R.id.SantoTomas);
@@ -189,44 +188,49 @@ public class PreguntasTest extends AppCompatActivity {
 
                     }
 
-                    int uwu = 0, aña;
+                    int ides = 0, añad;
                     for(int i = 0 ; i <appDatabase.daoScore().obtenerScore().size(); i++){
-                        uwu =appDatabase.daoScore().obtenerScore().get(i).id;
+                        ides =appDatabase.daoScore().obtenerScore().get(i).id;
 
                     }
-                    aña = uwu +1;
+                    añad = ides +1;
 
-                    Score book1 = new Score(aña,a);
+                    Score book1 = new Score(añad,a);
                     appDatabase.daoScore().InsertarScore(book1);
-                    int xd = 0;
-                    int penis = 0;
-                    int m =0;
+                    int scoren = 0;
+                    int mayor = 0;
+                    int mayorconfirmado =0;
                     for(int i = 0 ; i <appDatabase.daoScore().obtenerScore().size(); i++){
-                        xd =appDatabase.daoScore().obtenerScore().get(i).scorenum;
+                        scoren =appDatabase.daoScore().obtenerScore().get(i).scorenum;
                         int v = i-1;
 
                         if(i>0){
 
-                            penis = appDatabase.daoScore().obtenerScore().get(v).scorenum;
-                            if(penis>m){
-                                m=penis;
+                            mayor = appDatabase.daoScore().obtenerScore().get(v).scorenum;
+                            if(mayor>mayorconfirmado){
+                                mayorconfirmado=mayor;
                             }
                         }
-                        if(xd>m){
-                            txtPregunta2.setText("Best Score="+xd);
+                        if(scoren>mayorconfirmado){
+                            txtPregunta2.setText("Best Score="+scoren);
                         }
-                        txtPregunta.setText("Last Score="+xd);
+                        txtPregunta.setText("Last Score="+scoren);
 
                     }
                     button.setText("ERANTSUNAK");
                     vuelta ++;
                 }
-                        // Si se activa carga splash screen de nuevo para hacer el zoom al cargar homefragment entra en el else
+            }
+        });
 
-                        //    fragmentTransaction.remove(HomeFragment.this).commit();
-                Intent intent = new Intent(PreguntasTest.this, Receta.class);
-                startActivity(intent);
+        button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            // Este boton va a recoger todos los datos de el formulario
 
+            public void onClick(View view) {
+                appDatabase.daoScore().borrarScore();
+                txtPregunta.setText("Last Score=0");
+                txtPregunta2.setText("Best Score=0");
             }
         });
 

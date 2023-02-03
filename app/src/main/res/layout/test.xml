@@ -50,10 +50,23 @@
         android:id="@+id/button"
         android:layout_width="115dp"
         android:layout_height="48dp"
-        android:layout_marginTop="608dp"
+        android:layout_marginTop="620dp"
         android:background="@drawable/button_rounded_border"
         android:fontFamily="casual"
         android:text="@string/check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPregunta" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button2"
+        android:layout_width="115dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="560dp"
+        android:background="@drawable/button_rounded_border"
+        android:fontFamily="casual"
+        android:text="RESET"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +86,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/texto1"
                 android:layout_width="278dp"
                 android:layout_height="37dp"
                 android:elegantTextHeight="true"
@@ -123,7 +136,7 @@
                 android:text="@string/gaztelugatxe" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/texto3"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:elegantTextHeight="true"
