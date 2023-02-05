@@ -11,8 +11,8 @@ public interface DaoBooleans {
     @Query("SELECT * FROM booleans")
     List<Booleans> obtenerBooleans();
 
-    @Query("SELECT * FROM booleans WHERE id = :ident")
-    Booleans obtenerEncontrado(int ident);
+    @Query("SELECT visitado FROM booleans WHERE id = :ident")
+    boolean obtenerEncontrado(int ident);
 
     @Insert
     void insertarBoolean(Booleans...booleans);

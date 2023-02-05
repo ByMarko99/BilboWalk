@@ -7,43 +7,46 @@
     android:background = "@drawable/gradient_background"
     tools:context="com.example.fortheloveofgodcanyoujsutworik.PuzzleActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="H,4:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/marijaia_puzzlea"
+        android:alpha="0.5" />
+
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="193dp"
-
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="84dp"
-            android:layout_marginBottom="454dp"
-            android:alpha="0.5"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/marijaia_puzzlea" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="410dp"
-            android:layout_height="61dp"
-            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="659dp"
+            android:layout_marginBottom="0dp"
             android:text="MARIJAIA PUZZLEA"
             android:textAlignment="center"
-            android:textSize="24sp" />
-
-
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="21dp"
+            tools:layout_editor_absoluteY="531dp" />
     </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

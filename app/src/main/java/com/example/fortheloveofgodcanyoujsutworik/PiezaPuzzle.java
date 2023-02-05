@@ -1,6 +1,5 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
-
 import android.content.Context;
 
 import androidx.appcompat.widget.AppCompatImageView;

@@ -1,13 +1,10 @@
 package com.example.fortheloveofgodcanyoujsutworik;
 
-import static java.lang.Math.abs;
-
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -16,15 +13,12 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-
-import android.media.MediaPlayer;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,36 +26,39 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 public class PuzzleActivity extends AppCompatActivity {
     ArrayList<PiezaPuzzle> pieces;
+    String mCurrentPhotoPath;
+    String mCurrentPhotoUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
-        String assetName = null;
-        AssetManager am = getAssets();
-        try {
-            final String[] files = am.list("drawable-v24/");
-            assetName = files[0 % files.length];
-
-        } catch (IOException e) {
-            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT);
-        }
-
         final RelativeLayout layout = findViewById(R.id.layout);
         final ImageView imageView = findViewById(R.id.imageView);
 
         Intent intent = getIntent();
+        final String assetName = intent.getStringExtra("assetName");
+        mCurrentPhotoPath = intent.getStringExtra("mCurrentPhotoPath");
+        mCurrentPhotoUri = intent.getStringExtra("mCurrentPhotoUri");
+
         // run image related code after the view was laid out
         // to have all dimensions calculated
-        String finalAssetName = assetName;
         imageView.post(new Runnable() {
             @Override
             public void run() {
-                if (finalAssetName != null) {
-                    setPicFromAsset(finalAssetName, imageView);
+                if (assetName != null) {
+                    setPicFromAsset(assetName, imageView);
+                } else if (mCurrentPhotoPath != null) {
+                    setPicFromPath(mCurrentPhotoPath, imageView);
+                } else if (mCurrentPhotoUri != null) {
+                    imageView.setImageURI(Uri.parse(mCurrentPhotoUri));
                 }
                 pieces = splitImage();
                 TouchListener touchListener = new TouchListener(PuzzleActivity.this);
@@ -103,7 +100,7 @@ public class PuzzleActivity extends AppCompatActivity {
             // Decode the image file into a Bitmap sized to fill the View
             bmOptions.inJustDecodeBounds = false;
             bmOptions.inSampleSize = scaleFactor;
-
+            bmOptions.inPurgeable = true;
 
             Bitmap bitmap = BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
             imageView.setImageBitmap(bitmap);
@@ -114,9 +111,9 @@ public class PuzzleActivity extends AppCompatActivity {
     }
 
     private ArrayList<PiezaPuzzle> splitImage() {
-        int piecesNumber = 4;
-        int rows = 2;
-        int cols = 2;
+        int piecesNumber = 12;
+        int rows = 4;
+        int cols = 3;
 
         ImageView imageView = findViewById(R.id.imageView);
         ArrayList<PiezaPuzzle> pieces = new ArrayList<>(piecesNumber);
@@ -166,11 +163,11 @@ public class PuzzleActivity extends AppCompatActivity {
                 piece.pieceHeight = pieceHeight + offsetY;
 
                 // this bitmap will hold our final puzzle piece image
-                Bitmap puzzlePiece = Bitmap.createBitmap(pieceWidth + offsetX, pieceHeight + offsetY, Bitmap.Config.ARGB_8888);
+                Bitmap PiezaPuzzle = Bitmap.createBitmap(pieceWidth + offsetX, pieceHeight + offsetY, Bitmap.Config.ARGB_8888);
 
                 // draw path
                 int bumpSize = pieceHeight / 4;
-                Canvas canvas = new Canvas(puzzlePiece);
+                Canvas canvas = new Canvas(PiezaPuzzle);
                 Path path = new Path();
                 path.moveTo(offsetX, offsetY);
                 if (row == 0) {
@@ -237,15 +234,16 @@ public class PuzzleActivity extends AppCompatActivity {
                 canvas.drawPath(path, border);
 
                 // set the resulting bitmap to the piece
-                piece.setImageBitmap(puzzlePiece);
+                piece.setImageBitmap(PiezaPuzzle);
+
                 pieces.add(piece);
                 xCoord += pieceWidth;
             }
             yCoord += pieceHeight;
         }
+
         return pieces;
     }
-
 
     private int[] getBitmapPositionInsideImageView(ImageView imageView) {
         int[] ret = new int[4];
@@ -290,10 +288,7 @@ public class PuzzleActivity extends AppCompatActivity {
 
     public void checkGameOver() {
         if (isGameOver()) {
-            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.kirby);
-            mediaPlayer.start();
-            Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
-
+            finish();
         }
     }
 
@@ -303,6 +298,59 @@ public class PuzzleActivity extends AppCompatActivity {
                 return false;
             }
         }
+
         return true;
+    }
+
+    private void setPicFromPath(String mCurrentPhotoPath, ImageView imageView) {
+        // Get the dimensions of the View
+        int targetW = imageView.getWidth();
+        int targetH = imageView.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        Bitmap rotatedBitmap = bitmap;
+
+        // rotate bitmap if needed
+        try {
+            ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotatedBitmap = rotateImage(bitmap, 90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotatedBitmap = rotateImage(bitmap, 180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotatedBitmap = rotateImage(bitmap, 270);
+                    break;
+            }
+        } catch (IOException e) {
+            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        imageView.setImageBitmap(rotatedBitmap);
+    }
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
     }
 }
