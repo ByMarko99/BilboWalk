@@ -40,7 +40,7 @@
         <activity android:name=".PreguntasTest"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".PuzzleActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".Receta"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Santotomas"
