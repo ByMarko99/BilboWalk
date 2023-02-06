@@ -34,19 +34,11 @@ public class SeleccionJuegos extends AppCompatActivity {
         j5 = findViewById(R.id.imageButtonJ5);
         j6 = findViewById(R.id.imageButtonJ6);
 
-        //Leer la base de datos y cambiar la imagen de los imageButton dependiendo de si el juego esta desbloqueado o no
-
-
-
         appDatabase = Room.databaseBuilder(
                 getApplicationContext(),
                 AppDatabase.class,
                 "dbPruebas"
         ).allowMainThreadQueries().build();
-
-
-
-
 
         if(appDatabase.daoBooleans().obtenerEncontrado(0)){
             j1.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.azkunatxartelak));
@@ -54,28 +46,24 @@ public class SeleccionJuegos extends AppCompatActivity {
 
         if(appDatabase.daoBooleans().obtenerEncontrado(1)) {
             j2.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.galdetegia));
-
         }
 
         if(appDatabase.daoBooleans().obtenerEncontrado(2)) {
             j3.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nordamarijaia));
-
         }
 
         if(appDatabase.daoBooleans().obtenerEncontrado(3)) {
-            j4.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.happy_emoji));
-
+            j4.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.santotomas));
         }
 
         if(appDatabase.daoBooleans().obtenerEncontrado(4)) {
-            j5.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.basajaun2));
-
+            j5.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.receta));
         }
+
         if(appDatabase.daoBooleans().obtenerEncontrado(5)) {
-            j6.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.happy_emoji));
-
+            j6.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.puzzle));
         }
-        //El imageButton tiene que tener un listener que llame a la pantalla de juego
+
         j1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(appDatabase.daoBooleans().obtenerEncontrado(0)){
@@ -84,10 +72,6 @@ public class SeleccionJuegos extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(), "Juego no desbloqueado aún", Toast.LENGTH_SHORT).show();
                 }
-                //If (!Desbloqueado){
-                //Toast.makeText(SeleccionJuegos.this, "j1", Toast.LENGTH_SHORT).show();
-                //}
-
             }
         });
         j2.setOnClickListener(new View.OnClickListener() {

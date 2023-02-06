@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase;
         entities = {Score.class, Booleans.class, ScoreR.class},
         version = 1
 )
+
 public abstract class AppDatabase extends RoomDatabase {
     public abstract DaoScore daoScore();
     public abstract DaoBooleans daoBooleans();

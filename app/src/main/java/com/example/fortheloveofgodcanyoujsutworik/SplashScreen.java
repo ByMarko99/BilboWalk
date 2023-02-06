@@ -30,7 +30,8 @@ public class SplashScreen extends Activity {
             // Esto hace un delay y despues nos manda a la pantalla de login
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                //Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                Intent intent = new Intent(SplashScreen.this, PuzzleActivity.class);
                 startActivity(intent);
                 finish();
             }

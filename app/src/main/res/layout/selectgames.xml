@@ -80,8 +80,8 @@
                     android:layout_weight="1"
                     android:background="?selectableItemBackgroundBorderless"
                     android:scaleType="fitXY"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    android:src="@drawable/happy_emoji" />
+                    android:src="@drawable/santotomascandado"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
             <!-- JUEGOS -->
             <LinearLayout
@@ -102,8 +102,8 @@
                     android:layout_weight="1"
                     android:background="?selectableItemBackgroundBorderless"
                     android:scaleType="fitXY"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    android:src="@drawable/basajaun2" />
+                    android:src="@drawable/recetacandado"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/imageButtonJ6"
@@ -112,8 +112,8 @@
                     android:layout_weight="1"
                     android:background="?selectableItemBackgroundBorderless"
                     android:scaleType="fitXY"
-                    tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck"
-                    android:src="@drawable/happy_emoji" />
+                    android:src="@drawable/puzzlecandado"
+                    tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
