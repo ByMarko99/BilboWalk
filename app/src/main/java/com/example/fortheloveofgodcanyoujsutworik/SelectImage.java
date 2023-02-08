@@ -130,7 +130,7 @@ public class SelectImage extends AppCompatActivity {
             // Este boton va a recoger todos los datos de el formulario
             public void onClick(View view) {
                 txtGuia.setVisibility(View.VISIBLE);
-                txtGuia.setText("WTF you stupid motherfocker");
+                txtGuia.setText("Ez!! hau itsasneska da");
                 progressBar5.setVisibility(View.VISIBLE);
                 progressBar5.startAnimation(animShake);
                 progressBar3.setVisibility(View.INVISIBLE);

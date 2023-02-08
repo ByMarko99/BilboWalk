@@ -196,7 +196,7 @@ TextView textView10;
                     BtnCheckear.setVisibility(View.INVISIBLE);
 
                     texto2.startAnimation(animationScale);
-                    texto2.setText("🍆💧 OSO ONDO ༼ つ ◕_◕ ༽つ");
+                    texto2.setText("OSO ONDO ༼ つ ◕_◕ ༽つ");
                     texto2.setTextSize(24);
                     texto2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
