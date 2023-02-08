@@ -47,7 +47,7 @@ public class Santotomas extends AppCompatActivity {
             public void onClick(View view) {
 
                 String a = spinnerSAN.getSelectedItem().toString();
-                if(i==0){
+                if(i==0){ // SI LA OPCION CORRECTA ES ELEGIDA NOS CAMBIARA DE IMAGEN Y SALDRA UN TEXTO
                     if(a.equals("TALOA")){
                         textViewFeliz.setVisibility(View.VISIBLE);
                         textViewFeliz.startAnimation(animationScale);
@@ -56,7 +56,7 @@ public class Santotomas extends AppCompatActivity {
                         i++;
                     }else{
 
-                        imageView.startAnimation(animShake);
+                        imageView.startAnimation(animShake); // SI NO TEMBLARA
                     }
 
                 }else if(i==1){
@@ -97,7 +97,7 @@ public class Santotomas extends AppCompatActivity {
                         textViewFeliz.setText("GAINDITU DUZU");
                         textViewFeliz.setVisibility(View.VISIBLE);
                         textViewFeliz.startAnimation(animationScale);
-                        imageView.setImageResource(R.drawable.happy_emoji);
+                        imageView.setImageResource(R.drawable.happy_emoji); // SI LO COMPLETAMOS NOS SALDRA ESTE EMOJI EN PANTALLA
                         spinnerSAN.setVisibility(View.INVISIBLE);
                         imageView.startAnimation(animShake);
                         btnComprobar.setVisibility(View.INVISIBLE);

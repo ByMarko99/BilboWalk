@@ -19,7 +19,7 @@ public class Preguntas extends AppCompatActivity {
     TextView tv,succes,succes2;
     int total,fail=0;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // ESTA ACTIVIDAD LEERA CUANDO LA SOMBRA DEL BOTON DEL DRAG AND DROP PASE POR ENCIMA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preguntas);
 
@@ -40,8 +40,8 @@ public class Preguntas extends AppCompatActivity {
                         break;
                     case DragEvent.ACTION_DRAG_EXITED:
                         break;
-                    case DragEvent.ACTION_DRAG_LOCATION:
-                        if(button.getText().toString().equals("Isilik")){
+                    case DragEvent.ACTION_DRAG_LOCATION: // ESTO ES CUANDO LA SOMBRA PASA POR ENCIMA
+                        if(button.getText().toString().equals("Isilik")){ // ESTA ES LA FUNCION ISILIK
                             total = total + 1;
                             Isil.setVisibility(View.INVISIBLE);
                             EzJan.setVisibility(View.INVISIBLE);
@@ -216,7 +216,7 @@ public class Preguntas extends AppCompatActivity {
         });
 
 
-
+        // Y AQUI GENERAMOS LA SOMBRA
         button.setOnTouchListener(new View.OnTouchListener(){
 
             @Override
