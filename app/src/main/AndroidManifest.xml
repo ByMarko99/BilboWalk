@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fortheloveofgodcanyoujsutworik">
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FORTHELOVEOFGODCANYOUJSUTWORIK"
         tools:targetApi="31">
-
+        <activity
+            android:name=".tienda_premium"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".SplashScreen"
             android:exported="true"
@@ -30,28 +37,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".SelectImage"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Preguntas"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".PreguntasTest"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".PuzzleActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".Receta"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Santotomas"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".SeleccionJuegos"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SelectImage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Preguntas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PreguntasTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PuzzleActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Receta"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Santotomas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SeleccionJuegos"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAoWLJTWNv6-ordgjSWCwNIGCwsX7VbPzo"
-            />
-
+            android:value="AIzaSyAoWLJTWNv6-ordgjSWCwNIGCwsX7VbPzo" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

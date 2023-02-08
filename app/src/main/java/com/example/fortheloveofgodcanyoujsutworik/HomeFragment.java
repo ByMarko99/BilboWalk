@@ -108,7 +108,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private static final String TAG = HomeFragment.class.getSimpleName();
     private CameraPosition cameraPosition;
     private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialogpop;
     boolean mantenido = false;
     ImageView closebutton;
 
@@ -124,11 +123,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private static final String KEY_LOCATION = "location";
     private FusedLocationProviderClient fusedLocationClient;
     LatLng here;
+    Button btntienda;
     private List allPoints;
     String localizacion;
     TextView bubble;
     Drawable marker;
     Drawable markerdev;
+    TextView popup;
     AppDatabase appDatabase;
     private static View v;
     boolean alreadyExecuted = false;
@@ -221,6 +222,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             appDatabase.daoBooleans().insertarBoolean(new Booleans(5, false));
             appDatabase.daoBooleans().insertarBoolean(new Booleans(6, false));
             appDatabase.daoBooleans().insertarBoolean(new Booleans(7, false));
+            appDatabase.daoBooleans().insertarBoolean(new Booleans(99, false));
+
         }
 
         listEncontrados = appDatabase.daoBooleans().obtenerBooleans();
@@ -254,6 +257,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                             // getActivity().getSupportFragmentManager().beginTransaction().remove(HomeFragment.this).commit();
                             //TODO fixed crash // Y el fénix resurgió de sus cenizas
                             ProcessPhoenix.triggerRebirth(getContext()); //TODO fix de nuevo no funciona
+                            Toast.makeText(getContext(), "Reiniciando... \n Abre de nuevo la app", Toast.LENGTH_SHORT).show();
 
                             //Intent intent2 = new Intent(getActivity(), SplashScreen.class);
                             //ProcessPhoenix.triggerRebirth(getContext(), intent2);
@@ -312,6 +316,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         videoView.setVisibility(View.INVISIBLE);
         closebutton = v.findViewById(R.id.close);     // VIDEOVIEW OF XML
         closebutton.setVisibility(View.INVISIBLE);
+
+
 
 
         // alreadyExecuted = true;
@@ -377,11 +383,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 });
 
         bubble = v.findViewById(R.id.msgView);
-        marker = getResources().getDrawable(R.drawable.tvbackground);
+        walter = v.findViewById(R.id.waltre);
+
+        if(appDatabase.daoBooleans().obtenerEncontrado(99)){
+            marker = getResources().getDrawable(R.drawable.tvbackground_pollos);
+            walter.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.skinwalter));
+
+        }   else{
+            marker = getResources().getDrawable(R.drawable.tvbackground);
+
+        }
+
 
         bubble.setBackground(marker);
 
-        walter = v.findViewById(R.id.waltre);
         Random r = new Random();
         int low = 1;
         int high = 4; // 3
@@ -389,16 +404,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         walter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
+                    if (!appDatabase.daoBooleans().obtenerEncontrado(99)) {
+
 
 
                     int result = r.nextInt(high - low) + low;
                     //Toast.makeText(getContext(), String.valueOf(result), Toast.LENGTH_SHORT).show();
 
-                    if (!mantenido){
+                    if (!mantenido) {
 
 
                         if (result == 1) {
-                            if(mediaPlayer != null){ // Evitar solapación de audios if varios clicks
+                            if (mediaPlayer != null) { // Evitar solapación de audios if varios clicks
                                 mediaPlayer.stop();
 
                             }
@@ -409,19 +426,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                             mediaPlayer.start();
 
 
-                        }else if(result == 2){
-                            if(mediaPlayer != null){
+                        } else if (result == 2) {
+                            if (mediaPlayer != null) {
                                 mediaPlayer.stop();
 
-                            }                        bubble.setVisibility(v.VISIBLE);
+                            }
+                            bubble.setVisibility(v.VISIBLE);
                             animateText("    Amongus sussy remix");
                             setCharacterDelay(50);
                             mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
                             mediaPlayer.start();
 
 
-                        }else{
-                            if(mediaPlayer != null){
+                        } else {
+                            if (mediaPlayer != null) {
                                 mediaPlayer.stop();
 
                             }
@@ -431,6 +449,51 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                             mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
                             mediaPlayer.start();
 
+                        }
+                    }
+                }else if(appDatabase.daoBooleans().obtenerEncontrado(99)){
+                        int result = r.nextInt(high - low) + low;
+                        //Toast.makeText(getContext(), String.valueOf(result), Toast.LENGTH_SHORT).show();
+
+                        if (!mantenido) {
+
+
+                            if (result == 1) {
+                                if (mediaPlayer != null) { // Evitar solapación de audios if varios clicks
+                                    mediaPlayer.stop();
+
+                                }
+                                bubble.setVisibility(v.VISIBLE);
+                                animateText("    My name is Gustavo White. But you can call me sus.");
+                                setCharacterDelay(50);
+                                mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa);
+                                mediaPlayer.start();
+
+
+                            } else if (result == 2) {
+                                if (mediaPlayer != null) {
+                                    mediaPlayer.stop();
+
+                                }
+                                bubble.setVisibility(v.VISIBLE);
+                                animateText("    Nuestro pollo es halal ");
+                                setCharacterDelay(50);
+                                mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa2);
+                                mediaPlayer.start();
+
+
+                            } else {
+                                if (mediaPlayer != null) {
+                                    mediaPlayer.stop();
+
+                                }
+                                bubble.setVisibility(v.VISIBLE);
+                                animateText("    Servimos pollo a niños especial a niños desatendidos");
+                                setCharacterDelay(50);
+                                mediaPlayer = MediaPlayer.create(getContext(), R.raw.isa);
+                                mediaPlayer.start();
+
+                            }
                         }
                     }
                 } catch (Exception e) {
@@ -534,6 +597,21 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                }
             }
         });
+        btntienda = v.findViewById(R.id.tienda);
+        btntienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent2 = new Intent(getActivity(), tienda_premium.class);
+                    startActivity(intent2);
+                }
+                catch (Exception e){
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
 
 
 
@@ -614,6 +692,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 buleanobuleanooooooo[0] = false;
 
                 video();
+                String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.askyousahllreceive;
+                videoView.setVideoPath(videoPath);
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -627,9 +707,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 closebutton.setVisibility(View.VISIBLE);
                 appDatabase.daoBooleans().actualizarBoolean(true, 1);
 
+
                 buleanobuleanooooooo[1] = false;
 
                 video();
+                String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.basilika;
+                videoView.setVideoPath(videoPath);
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -648,6 +731,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
 
                 video();
+                String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.basktocho;
+                videoView.setVideoPath(videoPath);
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -665,6 +750,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 buleanobuleanooooooo[3] = false;
 
                 video();
+                String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.rock;
+                videoView.setVideoPath(videoPath);
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -682,6 +769,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 buleanobuleanooooooo[4] = true; // IMPASTA
 
                 video();
+                String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.santo;
+                videoView.setVideoPath(videoPath);
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -691,20 +780,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
             }
         }else if ( results[5][0] <  50 ){
             if(buleanobuleanooooooo[5]){
-                videoView.setVisibility(View.VISIBLE);
-                closebutton.setVisibility(View.VISIBLE);
+
                 appDatabase.daoBooleans().actualizarBoolean(true, 5);
 
                 buleanobuleanooooooo[5] = false;
 
 
-                video();
-                closebutton.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        videoView.setVisibility(View.INVISIBLE);
-                        closebutton.setVisibility(View.INVISIBLE);
-                    }
-                });
             }
 
         }else if ( results[6][0] <  50 ){
@@ -713,15 +794,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
                 closebutton.setVisibility(View.VISIBLE);
                 appDatabase.daoBooleans().actualizarBoolean(true, 6);
 
-                buleanobuleanooooooo[6] = false;
 
+                buleanobuleanooooooo[6] = false;
                 video();
+
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
                         closebutton.setVisibility(View.INVISIBLE);
                     }
                 });
+
             }
 
         }else if ( results[7][0] <  50 ){
@@ -734,6 +817,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
 
 
                 video();
+                String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.gozo;
+                videoView.setVideoPath(videoPath);
                 closebutton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         videoView.setVisibility(View.INVISIBLE);
@@ -833,8 +918,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         this.map = map;
 
 
-        LatLng bilbo = new LatLng(43.256962, -2.923460);
-        sitios.add(bilbo);
+        LatLng alhondiga   = new LatLng(43.2597222, -2.9369444);
+        sitios.add(alhondiga);
         LatLng begoñako_igogailua = new LatLng(43.2605556, -2.9216667);
         sitios.add(begoñako_igogailua);
         LatLng begoñako_basilika = new LatLng(43.25868611, -2.91384722);
@@ -845,8 +930,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
         sitios.add(arriaga_plaza);
         LatLng arenal   = new LatLng(43.2602778, -2.9236111);
         sitios.add(arenal);
-        LatLng alhondiga   = new LatLng(43.2597222, -2.9369444);
-        sitios.add(alhondiga);
+        LatLng bilbo = new LatLng(43.256962, -2.923460);
+        sitios.add(bilbo);
         LatLng zuricalday_gozotegia   = new LatLng(43.2508333, -2.9427778);
         sitios.add(zuricalday_gozotegia);
         //LatLng prueba   = new LatLng(43.283481, -2.965251);
