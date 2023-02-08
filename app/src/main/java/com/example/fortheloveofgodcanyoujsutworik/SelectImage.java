@@ -34,7 +34,6 @@ public class SelectImage extends AppCompatActivity {
     ProgressBar progressBar3;
     ProgressBar progressBar4;
     ProgressBar progressBar5;
-    Button btnNext;
     private KonfettiView konfettiView = null;
     private Shape.DrawableShape drawableShape = null;
 
@@ -123,15 +122,6 @@ public class SelectImage extends AppCompatActivity {
                 progressBar2.setVisibility(View.INVISIBLE);
                 progressBar5.setVisibility(View.INVISIBLE);
 
-            }
-        });
-        btnNext = findViewById(R.id.btnNext);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            // Nos mandara a una pantalla de registro la cual nos dejara crear un usuario
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SelectImage.this, Preguntas.class);
-                startActivity(intent);
             }
         });
 

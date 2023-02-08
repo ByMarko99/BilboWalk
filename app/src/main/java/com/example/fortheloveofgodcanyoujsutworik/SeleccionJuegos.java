@@ -3,6 +3,7 @@ package com.example.fortheloveofgodcanyoujsutworik;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -11,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
-import java.util.List;
-
 public class SeleccionJuegos extends AppCompatActivity {
     ImageButton j1;
     ImageButton j2;
@@ -20,6 +19,7 @@ public class SeleccionJuegos extends AppCompatActivity {
     ImageButton j4;
     ImageButton j5;
     ImageButton j6;
+    Button btnBilboGalderak;
     AppDatabase appDatabase;
 
     @Override
@@ -33,6 +33,12 @@ public class SeleccionJuegos extends AppCompatActivity {
         j4 = findViewById(R.id.imageButtonJ4);
         j5 = findViewById(R.id.imageButtonJ5);
         j6 = findViewById(R.id.imageButtonJ6);
+        btnBilboGalderak = findViewById(R.id.btnBilboGalderak);
+
+        btnBilboGalderak.setOnClickListener(view -> {
+            Intent intent = new Intent(this, PreguntasBilbo.class);
+            startActivity(intent);
+        });
 
         appDatabase = Room.databaseBuilder(
                 getApplicationContext(),
@@ -125,5 +131,6 @@ public class SeleccionJuegos extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
