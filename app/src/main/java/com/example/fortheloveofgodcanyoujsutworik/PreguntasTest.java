@@ -37,6 +37,7 @@ public class PreguntasTest extends AppCompatActivity {
 
         final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
         Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+
         txtPregunta = findViewById(R.id.txtPregunta);
         txtPregunta2 = findViewById(R.id.txtPregunta2);
 
@@ -69,15 +70,14 @@ public class PreguntasTest extends AppCompatActivity {
                     }
                 }
                 if(scoren>mayorconfirmado){
-                    txtPregunta2.setText("Best Score="+scoren);
+                    txtPregunta2.setText("Best Score="+scoren); // NUESTRO SCORE MAS ALTO
                 }
-                txtPregunta.setText("Last Score="+scoren);
+                txtPregunta.setText("Last Score="+scoren);// ULTIMO SCORE
             }
         }
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             // Este boton va a recoger todos los datos de el formulario
-
             public void onClick(View view) {
                 SanMames=findViewById(R.id.SanMames);
                 AzkunaZentroa=findViewById(R.id.AzkunaZentroa);
@@ -92,7 +92,7 @@ public class PreguntasTest extends AppCompatActivity {
                 SantoTomas=findViewById(R.id.SantoTomas);
 
 
-                if(vuelta==2){
+                if(vuelta==2){ // OTRA VEZ
                     SanMames.setTextColor(getResources().getColor(R.color.black));
                     AzkunaZentroa.setTextColor(getResources().getColor(R.color.black));
                     GurinOpila.setTextColor(getResources().getColor(R.color.black));
@@ -103,7 +103,7 @@ public class PreguntasTest extends AppCompatActivity {
                     button.setText("CHECK");
 
                 }
-                else if(vuelta==1){
+                else if(vuelta==1){ //RESPUESTAS
                     txtPregunta.setVisibility(View.INVISIBLE);
                     txtPregunta2.setVisibility(View.INVISIBLE);
                     txtView.setTextColor(getResources().getColor(R.color.black));
@@ -123,7 +123,7 @@ public class PreguntasTest extends AppCompatActivity {
                     vuelta ++;
 
                 }
-                else if(vuelta==0){
+                else if(vuelta==0){ // CHEQUEITO
 
                     int a = 0;
                     txtPregunta.setVisibility(View.VISIBLE);

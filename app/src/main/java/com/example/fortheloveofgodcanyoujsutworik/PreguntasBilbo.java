@@ -19,7 +19,7 @@ public class PreguntasBilbo extends AppCompatActivity {
         webview = (WebView)findViewById(R.id.webview);
         WebSettings webSettings = webview.getSettings();
 
-
+        // ESTO NOS MANDARA A UN GOOGLE FORMS PARA QUE HAGAN VUESTRA ENCUSTA Y OS LLEGUE AL EMAIL
         webSettings.setJavaScriptEnabled(true);
         webview.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLScGW7oYPfWvku32WNKd9xrsMweqYkr5leKY3rNv2oXSPauIkA/viewform");
         webview.setWebViewClient(new WebViewClient());

@@ -42,8 +42,8 @@ TextView textView10;
         texto3 = findViewById(R.id.texto3);
         texto4 = findViewById(R.id.texto4);
 
-        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
-        Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake); // ESTA ES LA ANIMACION DE SHAKE
+        Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.scale); // Y ESTA LA QUE AMPLIA EL TEXTO
 
         textView9 = findViewById(R.id.textView9);
         textView10 = findViewById(R.id.textView10);
@@ -55,7 +55,7 @@ TextView textView10;
                 getApplicationContext(),
                 AppDatabase.class,
                 "dbPruebas"
-        ).allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        ).allowMainThreadQueries().fallbackToDestructiveMigration().build(); // CARGAMOS LA BASE DE DATOS
 
         listScoreR = appDatabase.daoScoreR().obtenerScoreR();
         if(listScoreR.isEmpty()){
@@ -66,6 +66,7 @@ TextView textView10;
             int scr = 0;
             int mayor = 0;
             int mayorf =0;
+            // AQUI LO QUE VA A HACER ES COMPROBARNOS SI HAY SCORES Y CUANTOS HAY Y NOS RECOGERA EL ULTIMO Y EL MEJOR INTENTO
             for(int i = 0 ; i <listScoreR.size(); i++){
                 scr = listScoreR.get(i).scorenumR;
                 int v = i-1;
@@ -77,10 +78,10 @@ TextView textView10;
                     }
                 }
                 if(scr>mayorf){
-                    textView10.setText("Best Score="+scr);
+                    textView10.setText("Best Score="+scr); // ESTE ES NUESTRO MEJOR INTENTO
                 }
                 textView9.setText("Last Score="+scr);
-                if(listScoreR.get(i).completado==1){
+                if(listScoreR.get(i).completado==1){ // SI ESTA COMPLETADO NOS DICE PARA VOLVER A HACERLO
 
                     texto1.setVisibility(View.INVISIBLE);
                     texto3.setVisibility(View.INVISIBLE);
@@ -97,7 +98,7 @@ TextView textView10;
                     texto2.setTextSize(24);
                     texto2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-                }else{
+                }else{ // SI NO LA CARGA NORMAL
                     texto1.setVisibility(View.VISIBLE);
                     texto3.setVisibility(View.VISIBLE);
                     texto4.setVisibility(View.VISIBLE);
@@ -117,15 +118,15 @@ TextView textView10;
         }
 
 
-
+        // ESTO COMPRUEBA Y AÑADE SCORES
         BtnCheckear.setOnClickListener(new View.OnClickListener() {
         public void onClick(View view){
             i = 0;
-            if(vuelta==2){
+            if(vuelta==2){//VOLVEMOS A EMPEZAR
                 BtnCheckear.setText("BERRIRO?");
                 vuelta=0;
             }
-            else if(vuelta==1){
+            else if(vuelta==1){//ESTA VUELTA NOS MUESTRA LAS RESPUESTAS
 
                 Numero1.setText("3");
                 Numero2.setText("1");
@@ -134,7 +135,7 @@ TextView textView10;
                 vuelta ++;
 
             }
-            else if(vuelta==0) {
+            else if(vuelta==0) { // ESTA ES LA PRIMERA VUELTA Y NOS MOSTRARA LA ACTIVIDAD DE FORMA
                 if(BtnCheckear.getText().equals("???")){
                     texto1.setVisibility(View.VISIBLE);
                     texto3.setVisibility(View.VISIBLE);
@@ -201,12 +202,12 @@ TextView textView10;
 
                 }
 
-                int uwu = 0, aña;
+                int lalista = 0, aña;
                 for(int i = 0 ; i <appDatabase.daoScoreR().obtenerScoreR().size(); i++){
-                    uwu =appDatabase.daoScoreR().obtenerScoreR().get(i).idR;
+                    lalista =appDatabase.daoScoreR().obtenerScoreR().get(i).idR;
                 }
                 ScoreR book1 = null;
-                aña = uwu +1;
+                aña = lalista +1;
                 if(i<4){
                     book1 = new ScoreR(aña,i,0);
                 }

@@ -13,7 +13,7 @@ public class ScoreR {
     @NotNull
     public int idR;
     public int scorenumR;
-    public int completado;
+    public int completado;// ESTA VARIABLE NOS DICE SI ESTE JUEGO FUE COMPLETADO PREVIAMENTE
 
     public ScoreR(int idR, int scorenumR, int completado) {
         this.idR=idR;
